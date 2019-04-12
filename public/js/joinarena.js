@@ -6,18 +6,17 @@ $(document).ready(function() {
     let gameId = $("#game-id")
       .val()
       .trim();
-
-    // get request for an /arena/ game of the entered id
-    $.get("/arena/" + gameId, function(req, res) {
-      console.log("Connecting to game...");
-    });
+    if (gameId) {
+      window.location = `/arena/${gameId}`;
+    } else {
+      window.location = "/lobby";
+    }
   });
 
   // host-create button routes to api/arena and creates a new game
-  $("#host-create").on("click", function(req, res) {
+  $("#host-create").on("click", function() {
     //get request to randomly generate an ID
-    $.get("/arena/:gameid", function(req, res) {
-      console.log("Hosting game...");
-    });
+    let gameId = Math.floor(Math.random() * 10000000000);
+    window.location = `/arena/${gameId}`;
   });
 });
