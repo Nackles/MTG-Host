@@ -30,7 +30,10 @@ create table if not exists game
   duration TIME,
   winner_id INT,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  game_started TIMESTAMP DEFAULT NULL,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  is_active boolean default true,
+  accept_new boolean default true,
   PRIMARY KEY (id)
 );
 
