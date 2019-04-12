@@ -1,5 +1,5 @@
 -- seed data for test and troubleshooting
-insert into player (player_name) values ('ned stark'), ('jonSNOW333'), ('DanyDragons'), ('KINGJOFFREY'), ('reek'),('Tyrion Lanniser');
+insert into player (name) values ('ned stark'), ('jonSNOW333'), ('DanyDragons'), ('KINGJOFFREY'), ('reek'),('Tyrion Lanniser');
 
 insert into game (player1_id, player2_id, player3_id, player4_id,life1, life2, life3, life4, duration, winner_id)    
 values (6,4,null, null, 12,0,null,null,'00:20:30',6), (6,2,null, null, 5,0,null,null,'00:23:00',6),
@@ -21,7 +21,12 @@ values ('Boar','Green','Creature>Beast','2/2','Curse of the Swine','https://toke
 insert into token_log (game_id, player_id, token_id)
 values (1,4,3),(1,4,4),(1,4,4),(2,2,1),(2,2,4),(4,3,3),(4,3,1),(4,2,4),(5,2,1),(5,4,4),(5,2,4);
 
+insert into result (game_id, player_id, outcome, life, duration)
+values (1,4,'W', 12,'00:25:30'),(1,4,'L', 0,'00:17:45'),(1,4,'W', 15,'00:25:30'),(2,2,'L', 0,'00:18:00'),(2,2,'W', 12,'00:17:45'),
+(4,3,'L', 0,'00:18:00'),(4,3,'W', 19,'00:18:00'),(4,2,'L', 0,'00:25:30'),(5,2,'W', 5,'00:17:45'),(5,4,'L',0,'00:25:30'),(5,2,'L', 0,'00:18:00');
+
 select * from player;
 select * from game;
 select * from token;
 select * from token_log;
+select * from result;

@@ -4,12 +4,21 @@ drop database if exists mtg_ben;
 create database mtg_ben;
 use mtg_ben;
 
-drop table if exists player;
-
-create table player
+create table user
 (
   id INT NOT NULL AUTO_INCREMENT,
-  player_name VARCHAR(25) NOT NULL,
+  user_name VARCHAR(35) NOT NULL,
+  password varchar(255) NOT NULL,
+  img_link VARCHAR(500),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  PRIMARY KEY (id)
+);
+
+create table if not exists player
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(25) NOT NULL,
   img_link VARCHAR(500),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
@@ -64,6 +73,18 @@ create table if not exists token_log
 );
 -- CREATE INDEX game_id ON game (id);
 
+create table if not exists result
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  game_id int REFERENCES game(id),
+  player_id int REFERENCES player(id),
+  outcome char(1), -- could use a boolean but want to leave a "Draw" or "Dropped Game" state
+  life int,
+  duration time,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  PRIMARY KEY (id)
+);
 
 
 
