@@ -1,17 +1,18 @@
-<div class="container">
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h5 class="card-title">Lobby</h5>
-                    <p>
-                        <strong>ID</strong>: {{example.id}}</p>
-                    <p>
-                        <p>
-                            <strong>Text</strong>: {{example.text}}</p>
-                        <p>
-                            <strong>Description:</strong> {{example.description}}</p>
-                        <a href="/">← Back To Home</a>
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Host or Join Game</span>
+                <p>To Join a game, enter the GameId of the host.<br>
+                    To create a GameId to give to other players, Host a game!</p><br>
+                <div class="card-action">
+                    <div>
+                        <input type="text" name="game-id" placeholder="Ask your host for the Game ID" />
+                    </div>
+                    {{!-- //Search for the GameID of the host --}}
+                    <a class="btn" id="host-join">Join your Host</a><br><br>
+                    {{!-- //Get request as a button that will create a gameID --}}
+                    <a class="btn" id="host-create">Host a Game!</a>
                 </div>
             </div>
         </div>
