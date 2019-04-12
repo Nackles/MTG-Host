@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "exampledb",
+    "username": "vsc",
+    "password": "vscode",
+    "database": "mtg_ben",
     "host": "localhost",
     "dialect": "mysql"
   },
