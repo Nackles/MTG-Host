@@ -3,18 +3,18 @@
 drop database if exists mtg_ben;
 create database mtg_ben;
 use mtg_ben;
-drop table if exists user;
 
-create table user
+drop table if exists player;
+
+create table player
 (
   id INT NOT NULL AUTO_INCREMENT,
-  userid VARCHAR(25) NOT NULL,
+  player_id VARCHAR(25) NOT NULL,
   img_link VARCHAR(500),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (id)
 );
-select * from user;
 
 create table if not exists game
 (
@@ -53,7 +53,7 @@ create table if not exists token_log
 (
   id INT NOT NULL AUTO_INCREMENT,
   game_id INT,
-  user_id INT,
+  player_id INT,
   token_id int,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
