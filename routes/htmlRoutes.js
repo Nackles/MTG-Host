@@ -18,6 +18,8 @@ module.exports = function(app) {
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/arena/:gameId", isAuthenticated, function(req, res) {
     let gameId = req.params.gameId;
-    res.render("arena", { game: gameId });
+    res.render("arena", {
+      example: { id: 1, text: "A test", description: gameId }
+    });
   });
 };
