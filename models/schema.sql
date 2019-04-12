@@ -9,7 +9,7 @@ drop table if exists player;
 create table player
 (
   id INT NOT NULL AUTO_INCREMENT,
-  player_id VARCHAR(25) NOT NULL,
+  player_name VARCHAR(25) NOT NULL,
   img_link VARCHAR(500),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
@@ -55,14 +55,14 @@ create table if not exists token
 create table if not exists token_log
 (
   id INT NOT NULL AUTO_INCREMENT,
-  game_id INT,
-  player_id INT,
-  token_id int,
+  game_id INT REFERENCES game(id),
+  player_id INT REFERENCES player(id),
+  token_id INT REFERENCES token(id),
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (id)
 );
-
+-- CREATE INDEX game_id ON game (id);
 
 
 

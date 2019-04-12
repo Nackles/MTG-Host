@@ -1,5 +1,5 @@
 -- seed data for test and troubleshooting
-insert into player (player_id) values ('ned stark'), ('jonSNOW333'), ('DanyDragons'), ('KINGJOFFREY'), ('reek'),('Tyrion Lanniser');
+insert into player (player_name) values ('ned stark'), ('jonSNOW333'), ('DanyDragons'), ('KINGJOFFREY'), ('reek'),('Tyrion Lanniser');
 
 insert into game (player1_id, player2_id, player3_id, player4_id,life1, life2, life3, life4, duration, winner_id)    
 values (6,4,null, null, 12,0,null,null,'00:20:30',6), (6,2,null, null, 5,0,null,null,'00:23:00',6),
