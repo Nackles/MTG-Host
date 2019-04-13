@@ -1,7 +1,7 @@
 -- Queries used in mtg-ben
 
 -- Easy one just to get a functioning query in there
-select g.id as 'GameID', p.player_name as "WON_BY",player1_id, player2_id, player3_id, player4_id, duration, g.updated_at as "Date/Time" 
+select g.id as 'GameID', p.name as "WON_BY",player1_id, player2_id, player3_id, player4_id, duration, g.updated_at as "Date/Time" 
 from 
 game g
 left join player p on g.winner_id = p.id;
@@ -26,6 +26,7 @@ left join (select id, name from player) as winner_sub on game.winner_id = winner
 where game.id in (1,2);
 
 -- raw win loss results, will want to add a way to get the head to head subqueries created (e.g., KingJoffrey v Tyrion W/L)
+-- I need to add foreign keys to this table but not yet because the data is all seeds (and there will be insert errors)
 select player.name, result.outcome, round(avg(result.life)), round(avg(result.duration)), count(*) from result
 left join player on  result.player_id = player.id
 group by 1,2
