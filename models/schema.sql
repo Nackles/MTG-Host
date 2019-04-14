@@ -67,9 +67,9 @@ create table if not exists game
   PRIMARY KEY (id),
   FOREIGN KEY (player1_id) REFERENCES player(id),
   -- we aren't going to cascade updates or deletes because game logs always maintain integrity
-  FOREIGN KEY (player1_id) REFERENCES player(id),
-  FOREIGN KEY (player1_id) REFERENCES player(id),
-  FOREIGN KEY (player1_id) REFERENCES player(id),
+  FOREIGN KEY (player2_id) REFERENCES player(id),
+  FOREIGN KEY (player3_id) REFERENCES player(id),
+  FOREIGN KEY (player4_id) REFERENCES player(id),
   FOREIGN KEY (winner_id) REFERENCES player(id)
 );
 
@@ -113,6 +113,7 @@ create table if not exists result
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (id)
+  --  We shouldn't need foreign keys here because we defined them in game_id and player_id in this table.  We'll see!
 );
 
 
