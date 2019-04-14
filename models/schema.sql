@@ -25,7 +25,7 @@ create table if not exists player
   PRIMARY KEY (id)
 );
 
-create table if not exists game
+create table if not exists game_archive
 (
   id INT NOT NULL AUTO_INCREMENT,
   player1_id INT,
@@ -45,6 +45,35 @@ create table if not exists game
   accept_new boolean default true,
   PRIMARY KEY (id)
 );
+
+create table if not exists game
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  player1_id INT,
+  player2_id INT,
+  player3_id INT,
+  player4_id INT,
+  life1 INT,
+  life2 INT,
+  life3 INT,
+  life4 INT,
+  duration TIME,
+  winner_id INT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  game_started TIMESTAMP DEFAULT NULL,
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  is_active boolean default true,
+  accept_new boolean default true,
+  PRIMARY KEY (id),
+  FOREIGN KEY (player1_id) REFERENCES player(id),
+  -- we aren't going to cascade updates or deletes because game logs always maintain integrity
+  FOREIGN KEY (player2_id) REFERENCES player(id),
+  FOREIGN KEY (player3_id) REFERENCES player(id),
+  FOREIGN KEY (player4_id) REFERENCES player(id),
+  FOREIGN KEY (winner_id) REFERENCES player(id)
+);
+
+
 
 create table if not exists token
 (
@@ -84,6 +113,7 @@ create table if not exists result
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (id)
+  --  We shouldn't need foreign keys here because we defined them in game_id and player_id in this table.  We'll see!
 );
 
 
