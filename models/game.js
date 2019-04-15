@@ -1,7 +1,7 @@
 
 // GAME : This table is key to the app.  It records a log of all games played (active, completed, or dropped) and is updated to show real time scores.  Here is the gist of how the table is used (table is dependent on player.id existing.  Table contributes to edits to token_log and result):
-// - There are foreign keys  to the player.id record on this table (belongsTo), BUT, we don't cascade any delete events of players even if we allow deletion.  Game history is not to be "disappeared"
-// - When a new game is created, the "player1_id" field is populated with the game host, and depending on app logic, a life integer will be entered in life 1.  is_active is set to true (its active), and accept_new is set to true (it is accepting more players)
+// - There are foreign keys  to the player.id record on this table (belongsTo), BUT, we don't cascade any delete events of players even if we allow deletion.  Game history is not to be 'disappeared'
+// - When a new game is created, the 'player1_id' field is populated with the game host, and depending on app logic, a life integer will be entered in life 1.  is_active is set to true (its active), and accept_new is set to true (it is accepting more players)
 // - Logic is tbd, but it is likely the hosting player will declare at the start of game creation how many players there are (max 4).  As players join the game, the players slots of 2,3,4 can be filled.
 // - Either the game logic starts the game or the host does, and the game_started field is populated.  This is to enable the duration field to calculate true game length as opposed to time spent hanging out in the game lobby.  Will there be the ability for a player to leave the lobby?  If so, will need that update query ready
 // - once the game starts, accept_new is set to false, the life fields are updates as they are incremented or decremented.
@@ -14,7 +14,7 @@
 
 
 module.exports = function (sequelize, DataTypes) {
-  var Game = sequelize.define("Game", {
+  var Game = sequelize.define('Game', {
     player1_id: DataTypes.Int
      INT,
     player2_id INT,
@@ -39,7 +39,7 @@ module.exports = function (sequelize, DataTypes) {
     // Associating Game with Posts
     // When an Game is deleted, also delete any associated Posts
     Game.belongsTo(models.Player, {
-      onDelete: "cascade"
+      onDelete: 'cascade'
     });
   };
 
