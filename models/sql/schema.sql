@@ -19,7 +19,7 @@ create table if not exists player
   id INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL REFERENCES user(id),
   name VARCHAR(25) NOT NULL,
-  img_link VARCHAR(500),
+  img_link VARCHAR(2083), -- evidently this is the URL limit
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (id)
