@@ -8,6 +8,65 @@
 // - There shouldn't be any need to store token info here, it should be able to be managed only in token and token log.  From there you can show what tokens were played, by whom, and on what game
 // Queries needed: 5 Insert record for new game, update record to add players, update record to adjust life, update record to to trigger game start , update record to set end game info (these things *could* be stored only in results table, and we may end up doing that).  A query associated with the result table will add that needful data
 
+<<<<<<< HEAD
+let db = require("../models");
+
+module.exports = function(app) {
+  app.get("/api/games", function(req, res) {
+    // This would be an admin dashboard of all games in progress.  In real life this would be kept secure/secret
+    db.game
+      .findAll({
+        include: [db.game]
+      })
+      .then(function(dbGame) {
+        res.json(dbGame);
+      });
+  });
+
+  app.get("/api/games/:id", function(req, res) {
+    // This will get real time update info for all clients
+    db.game
+      .findOne({
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(function(dbGame) {
+        res.json(dbGame);
+      });
+  });
+
+  // creating game and establishing initial parameters.  Starting data is player1_id (and, if we elect to go this route, how many players)
+  app.post("/api/games", function(req, res) {
+    db.game.create(req.body).then(function(dbGame) {
+      res.json(dbGame);
+    });
+  });
+
+  // PUT route for updating games.  We are going to update, depending on the flow of the game, most of the fields in the table, using this
+  app.put("/api/games", function(req, res) {
+    db.Post.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // Not likely we would delete game ids, but here it in just in case
+  app.delete("/api/games/:id", function(req, res) {
+    db.game
+      .destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(function(dbGame) {
+        res.json(dbGame);
+      });
+  });
+=======
 module.exports = function(sequelize, DataTypes) {
   let Author = sequelize.define("Author", {
     // Giving the Author model a name of type STRING
@@ -23,4 +82,5 @@ module.exports = function(sequelize, DataTypes) {
   };
 
   return Author;
+>>>>>>> Development
 };
