@@ -8,19 +8,14 @@
 // - There shouldn't be any need to store token info here, it should be able to be managed only in token and token log.  From there you can show what tokens were played, by whom, and on what game
 // Queries needed: 5 Insert record for new game, update record to add players, update record to adjust life, update record to to trigger game start , update record to set end game info (these things *could* be stored only in results table, and we may end up doing that).  A query associated with the result table will add that needful data
 
-<<<<<<< HEAD
 let db = require("../models");
 
 module.exports = function(app) {
   app.get("/api/games", function(req, res) {
     // This would be an admin dashboard of all games in progress.  In real life this would be kept secure/secret
-    db.game
-      .findAll({
-        include: [db.game]
-      })
-      .then(function(dbGame) {
-        res.json(dbGame);
-      });
+    db.game.findAll({}).then(function(dbGame) {
+      res.json(dbGame);
+    });
   });
 
   app.get("/api/games/:id", function(req, res) {
@@ -66,21 +61,4 @@ module.exports = function(app) {
         res.json(dbGame);
       });
   });
-=======
-module.exports = function(sequelize, DataTypes) {
-  let Author = sequelize.define("Author", {
-    // Giving the Author model a name of type STRING
-    name: DataTypes.STRING
-  });
-
-  Author.associate = function(models) {
-    // Associating Author with Posts
-    // When an Author is deleted, also delete any associated Posts
-    Author.hasMany(models.Post, {
-      onDelete: "cascade"
-    });
-  };
-
-  return Author;
->>>>>>> Development
 };
