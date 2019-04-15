@@ -7,17 +7,28 @@
 
   {{!-- Styling --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
-
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="/styles/mtghost.css" media="screen" title="no title" charset="utf-8">
+
 
 </head>
 
 <body>
+  <div class="container">
   {{{body}}}
+  </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="/js/index.js"></script>
   <script src="/js/joinarena.js"></script>
+  {{!-- Click handlers for tabs --}}
+  <script>
+    $(document).ready(function () {
+      $(".tabs").tabs();
+    });
+  </script>
 </body>
 
 </html>
