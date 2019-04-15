@@ -8,7 +8,7 @@ module.exports = function(app) {
   // Otherwise the user will be sent an error
   app.post(
     "/api/login",
-    passport.authenticate({
+    passport.authenticate("local", {
       successRedirect: "/lobby",
       failureRedirect: "/",
       failureFlash: true
@@ -20,11 +20,13 @@ module.exports = function(app) {
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
     console.log(req.body);
-    db.User.create({
-      username: req.body.username,
-      password: req.body.password
-    })
+    db.user
+      .create({
+        username: req.body.username,
+        password: req.body.password
+      })
       .then(function() {
+        console.log(req.body);
         res.redirect(307, "/api/login");
       })
       .catch(function(err) {
