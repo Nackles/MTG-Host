@@ -1,4 +1,3 @@
-
 // GAME : This table is key to the app.  It records a log of all games played (active, completed, or dropped) and is updated to show real time scores.  Here is the gist of how the table is used (table is dependent on player.id existing.  Table contributes to edits to token_log and result):
 // - There are foreign keys  to the player.id record on this table (belongsTo), BUT, we don't cascade any delete events of players even if we allow deletion.  Game history is not to be 'disappeared'
 // - When a new game is created, the 'player1_id' field is populated with the game host, and depending on app logic, a life integer will be entered in life 1.  is_active is set to true (its active), and accept_new is set to true (it is accepting more players)
@@ -9,76 +8,61 @@
 // - There shouldn't be any need to store token info here, it should be able to be managed only in token and token log.  From there you can show what tokens were played, by whom, and on what game
 // Queries needed: 5 Insert record for new game, update record to add players, update record to adjust life, update record to to trigger game start , update record to set end game info (these things *could* be stored only in results table, and we may end up doing that).  A query associated with the result table will add that needful data
 
+module.exports = function(sequelize, DataTypes) {
+  let game = sequelize.define("game", {
+    player1_id: {
+      type: DataTypes.INTEGER,
+      references: { model: player, key: "id" }
+    },
+    player2_id: {
+      type: DataTypes.INTEGER,
+      references: { model: player, key: "id" }
+    },
+    player3_id: {
+      type: DataTypes.INTEGER,
+      references: { model: player, key: "id" }
+    },
+    player4_id: {
+      type: DataTypes.INTEGER,
+      references: { model: player, key: "id" }
+    },
+    life1: DataTypes.INTEGER,
+    life2: DataTypes.INTEGER,
+    life3: DataTypes.INTEGER,
+    life4: DataTypes.INTEGER,
+    duration: DataTypes.TIME,
+    game_started: { type: DataTypes.TIMESTAMP, defaultValue: null },
+    is_active: { type: DataTypes.TIMESTAMP, defaultValue: true },
+    accept_new: { type: DataTypes.TIMESTAMP, defaultValue: true },
+    winner_id: {
+      type: DataTypes.INTEGER,
+      references: { model: player, key: "id" }
+    }
+  });
 
-// Insert record use case player clicks button to create game and host
-
-
-module.exports = function (sequelize, DataTypes) {
-  var Game = sequelize.define('Game', {
-    player1_id: DataTypes.Int
-     INT,
-    player2_id INT,
-    player3_id INT,
-    player4_id INT,
-
-
-
-
-
-    player1_id {
-      type: Sequelize.INTEGER,
-      references: {
-        model: Trainer,
-        key: 'id'
-      }
-
-    name: DataTypes.STRING
-    });
-
-  Game.associate = function (models) {
-    // Associating Game with Posts
-    // When an Game is deleted, also delete any associated Posts
-    Game.belongsTo(models.Player, {
-      onDelete: 'cascade'
-    });
-  };
-
-  return Game;
+  return game;
 };
 
-
-create table if not exists game
-  (
-    id INT NOT NULL AUTO_INCREMENT,
-    player1_id INT,
-    player2_id INT,
-    player3_id INT,
-    player4_id INT,
-    life1 INT,
-    life2 INT,
-    life3 INT,
-    life4 INT,
-    duration TIME,
-    winner_id INT,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    game_started TIMESTAMP DEFAULT NULL,
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    is_active boolean default true,
-    accept_new boolean default true,
-    PRIMARY KEY(id),
-    FOREIGN KEY(player1_id) REFERENCES player(id),
-    --we aren't going to cascade updates or deletes because game logs always maintain integrity
-  FOREIGN KEY(player2_id) REFERENCES player(id),
-    FOREIGN KEY(player3_id) REFERENCES player(id),
-    FOREIGN KEY(player4_id) REFERENCES player(id),
-    FOREIGN KEY(winner_id) REFERENCES player(id)
-  );
-
-
-
-
-
-
-
-
-
+// id INT NOT NULL AUTO_INCREMENT,
+// player1_id INT,
+// player2_id INT,
+// player3_id INT,
+// player4_id INT,
+// life1 INT,
+// life2 INT,
+// life3 INT,
+// life4 INT,
+// duration TIME,
+// winner_id INT,
+// created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+// game_started TIMESTAMP DEFAULT NULL,
+// updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+// is_active boolean default true,
+// accept_new boolean default true,
+// PRIMARY KEY (id),
+// FOREIGN KEY (player1_id) REFERENCES player(id),
+// -- we aren't going to cascade updates or deletes because game logs always maintain integrity
+// FOREIGN KEY (player2_id) REFERENCES player(id),
+// FOREIGN KEY (player3_id) REFERENCES player(id),
+// FOREIGN KEY (player4_id) REFERENCES player(id),
+// FOREIGN KEY (winner_id) REFERENCES player(id)
