@@ -1,6 +1,6 @@
 process.env.NODE_ENV = "test";
 
-// let db = require("../models");
+let db = require("../models");
 
 let chai = require("chai");
 let chaiHttp = require("chai-http");
@@ -9,14 +9,14 @@ let expect = chai.expect;
 
 chai.use(chaiHttp);
 let request = "";
-
 describe("User Signup", () => {
   beforeEach(() => {
     request = chai.request(server);
-    // return db.sequelize.sync({ force: true });
+    db.users.destroy({ where: {} });
+    db.users.create({ username: "Bob", password: "password" });
   });
 
-  // Test the /api/signup route
+  // Test the /api/login route
   describe("/api/signup", () => {
     it("should create a new user", done => {
       let user = {
@@ -35,11 +35,10 @@ describe("User Signup", () => {
     });
   });
 
-  // Test the /api/login route
   describe("/api/login", () => {
     it("should authenticate a user", done => {
       let user = {
-        username: "Emile",
+        username: "Bob",
         password: "password"
       };
       request
@@ -48,8 +47,26 @@ describe("User Signup", () => {
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
-          expect(res).to.be.a("object");
-          console.log(res);
+          expect(res.res.text).to.contain("Host or Join Game");
+          done();
+        });
+    });
+  });
+
+  describe("/api/login", () => {
+    it("should not authenticate a user and redirect to home", done => {
+      let user = {
+        username: "Bob",
+        password: "pasword"
+      };
+      request
+        .post("/api/login")
+        .send(user)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.res.text).to.contain("Username:");
+          expect(res.res.text).to.contain("Password:");
           done();
         });
     });
