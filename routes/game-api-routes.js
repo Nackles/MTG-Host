@@ -32,7 +32,7 @@ module.exports = function(app) {
   });
 
   // creating game and establishing initial parameters.  Starting data is player1_id (and, if we elect to go this route, how many players)
-  app.post("/api/games", function(req, res) {
+  app.game("/api/games", function(req, res) {
     db.game.create(req.body).then(function(dbGame) {
       res.json(dbGame);
     });
@@ -40,13 +40,15 @@ module.exports = function(app) {
 
   // PUT route for updating games.  We are going to update, depending on the flow of the game, most of the fields in the table, using this
   app.put("/api/games", function(req, res) {
-    db.Post.update(req.body, {
-      where: {
-        id: req.body.id
-      }
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
+    db.game
+      .update(req.body, {
+        where: {
+          id: req.body.id
+        }
+      })
+      .then(function(dbGame) {
+        res.json(dbGame);
+      });
   });
 
   // Not likely we would delete game ids, but here it in just in case
