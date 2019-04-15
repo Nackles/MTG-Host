@@ -24,6 +24,7 @@ function createUser(event) {
 }
 
 function createPlayer(event) {
+  event.preventDefault();
   // Constructing a newPlayer object to hand to the database
   let newPlayer = {
     name: userName.val().trim(),

@@ -1,10 +1,47 @@
+<h1 class="center-align">MTG HOST</h1>
+
+<div class="red white-text valign-wrapper bezel">
+    <h4 class="center-align">PLAYER LIFE TRACKER</h4>
+</div>
+{{!-- anchor tags (playerx.id) MUST match player-tray IDs to function --}}
+{{!-- every time /arena/ recieves a GAME update, jQuery will check game.playerx_id for NULL and deactivate the tab if null --}}
 <div class="row">
     <div class="col s12">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">WELCOME TO THE ARENA!</span>
-                <p>LOWER THE GATES!</p><br>
+        <ul class="tabs">
+            <li class="tab col s3">
+                <a href="#{{game.player1_id}}">
+                    <i class="tiny material-icons">layers</i>{{game.player1_id.name}} Life: {{game.life1}}</a>
+            </li>
+            <li class="tab col s3">
+                <a href="#{{game.player2_id}}">
+                    <i class="tiny material-icons">send</i> {{game.player2_id.name}} Life: {{game.life2}}</a>
+            </li>
+            <li class="tab col s3">
+                <a href="#{{game.player3_id}}">
+                    <i class="tiny material-icons">loyalty</i> {{game.player3_id.name}} Life: {{game.life3}}</a>
+            </li>
+            <li class="tab col s3">
+                <a href="#{{game.player4_id}}">
+                    <i class="tiny material-icons">map</i> {{game.player4_id.name}} Life: {{game.life4}}</a>
+            </li>
+        </ul>
+    </div>
+    <!-- player info trays -->
+    <!-- RULE: P1 tab is never disabled - P2/3/4 starts disabled and enable as players connect -->
+    {{#each players}}
+    <div id="{{this.id}}" class="col s12 player-tray">
+        <!-- once complete, handlebars the below per player -->
+        <!-- player 1 -->
+        <div id="{{this.id}}-info">
+            <div class="valign-wrapper"><i class="small material-icons">{{this.icon}}</i>
+                <p>{{this.name}}</p>
             </div>
         </div>
+        <div id="p{{this.id}}-stats">jQuery updates all stats (W/L) inline, ONCE on-login{{{this.stats}}</div>
+        <span id="p{{this.id}}-life">Life: {{this.life}}</span><span id="spacer-span"> </span><span id="p{{{this.id}}-poison">Poison: {{this.poison}}</span>
+        <div class="divider"></div>
+        <div id="p{{this.id}}-tokens">TOKENS HANDLEBARS IS HERE {{this.tokens}}
+        </div>
     </div>
+    {{/each}}
 </div>

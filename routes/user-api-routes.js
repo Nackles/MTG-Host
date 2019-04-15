@@ -5,7 +5,7 @@ module.exports = function(app) {
     // There may not be a need to show all users other than in an admin capacity
     db.user
       .findAll({
-        include: [db.User]
+        include: [db.user]
       })
       .then(function(dbUser) {
         res.json(dbUser);
