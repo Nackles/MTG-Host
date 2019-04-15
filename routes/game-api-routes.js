@@ -10,73 +10,22 @@
 // Queries needed: 5 Insert record for new game, update record to add players, update record to adjust life, update record to to trigger game start , update record to set end game info (these things *could* be stored only in results table, and we may end up doing that).  A query associated with the result table will add that needful data
 
 
-// Insert record use case player clicks button to create game and host
-
-
 module.exports = function (sequelize, DataTypes) {
-  var Game = sequelize.define("Game", {
-    player1_id: DataTypes.Int
-     INT,
-    player2_id INT,
-    player3_id INT,
-    player4_id INT,
-
-
-
-
-
-    player1_id {
-      type: Sequelize.INTEGER,
-      references: {
-        model: Trainer,
-        key: 'id'
-      }
-
+  var Author = sequelize.define("Author", {
+    // Giving the Author model a name of type STRING
     name: DataTypes.STRING
-    });
+  });
 
-  Game.associate = function (models) {
-    // Associating Game with Posts
-    // When an Game is deleted, also delete any associated Posts
-    Game.belongsTo(models.Player, {
+  Author.associate = function (models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    Author.hasMany(models.Post, {
       onDelete: "cascade"
     });
   };
 
-  return Game;
+  return Author;
 };
-
-
-create table if not exists game
-  (
-    id INT NOT NULL AUTO_INCREMENT,
-    player1_id INT,
-    player2_id INT,
-    player3_id INT,
-    player4_id INT,
-    life1 INT,
-    life2 INT,
-    life3 INT,
-    life4 INT,
-    duration TIME,
-    winner_id INT,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    game_started TIMESTAMP DEFAULT NULL,
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-    is_active boolean default true,
-    accept_new boolean default true,
-    PRIMARY KEY(id),
-    FOREIGN KEY(player1_id) REFERENCES player(id),
-    --we aren't going to cascade updates or deletes because game logs always maintain integrity
-  FOREIGN KEY(player2_id) REFERENCES player(id),
-    FOREIGN KEY(player3_id) REFERENCES player(id),
-    FOREIGN KEY(player4_id) REFERENCES player(id),
-    FOREIGN KEY(winner_id) REFERENCES player(id)
-  );
-
-
-
-
 
 
 

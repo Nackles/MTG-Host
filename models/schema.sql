@@ -4,12 +4,11 @@ drop database if exists mtg_ben;
 create database mtg_ben;
 use mtg_ben;
 
-create table user
+create table if not exists user
 (
   id INT NOT NULL AUTO_INCREMENT,
-  user_name VARCHAR(35) NOT NULL,
-  password varchar(255) NOT NULL,
-  img_link VARCHAR(500),
+  username VARCHAR(35) NOT NULL,
+  password varchar(20) NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (id)
@@ -18,31 +17,11 @@ create table user
 create table if not exists player
 (
   id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL REFERENCES user(id),
   name VARCHAR(25) NOT NULL,
   img_link VARCHAR(500),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-  PRIMARY KEY (id)
-);
-
-create table if not exists game_archive
-(
-  id INT NOT NULL AUTO_INCREMENT,
-  player1_id INT,
-  player2_id INT,
-  player3_id INT,
-  player4_id INT,
-  life1 INT,
-  life2 INT,
-  life3 INT,
-  life4 INT,
-  duration TIME,
-  winner_id INT,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  game_started TIMESTAMP DEFAULT NULL,
-  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-  is_active boolean default true,
-  accept_new boolean default true,
   PRIMARY KEY (id)
 );
 
@@ -96,6 +75,7 @@ create table if not exists token_log
   game_id INT REFERENCES game(id),
   player_id INT REFERENCES player(id),
   token_id INT REFERENCES token(id),
+  tapped BOOLEAN default false,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (id)
