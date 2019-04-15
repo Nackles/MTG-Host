@@ -32,7 +32,6 @@ module.exports = function(app) {
     });
   });
 
-<<<<<<< HEAD
   //  If we are going to update user, I have it set to cascase username updates to player.name.  Will need to test this if we choose to use that functionality
   app.put("/api/users/:id", function(req, res) {
     db.user
@@ -58,18 +57,4 @@ module.exports = function(app) {
         res.json(dbUser);
       });
   });
-=======
-  // Not likely we would delete user ids, but here it in just in case
-  app.delete("/api/users/:id", function(req, res) {
-    db.user
-      .destroy({
-        where: {
-          id: req.params.id
-        }
-      })
-      .then(function(dbUser) {
-        res.json(dbUser);
-      });
-  });
->>>>>>> Development
 };
