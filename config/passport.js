@@ -7,7 +7,7 @@ let db = require("../models");
 passport.use(
   new LocalStrategy(function(username, password, done) {
     // When a user tries to sign in this code runs
-    db.user
+    db.users
       .findOne({
         where: {
           username: username
