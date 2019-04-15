@@ -1,4 +1,3 @@
-
 // GAME : This table is key to the app.  It records a log of all games played (active, completed, or dropped) and is updated to show real time scores.  Here is the gist of how the table is used (table is dependent on player.id existing.  Table contributes to edits to token_log and result):
 // - There are foreign keys  to the player.id record on this table (belongsTo), BUT, we don't cascade any delete events of players even if we allow deletion.  Game history is not to be "disappeared"
 // - When a new game is created, the "player1_id" field is populated with the game host, and depending on app logic, a life integer will be entered in life 1.  is_active is set to true (its active), and accept_new is set to true (it is accepting more players)
@@ -9,14 +8,13 @@
 // - There shouldn't be any need to store token info here, it should be able to be managed only in token and token log.  From there you can show what tokens were played, by whom, and on what game
 // Queries needed: 5 Insert record for new game, update record to add players, update record to adjust life, update record to to trigger game start , update record to set end game info (these things *could* be stored only in results table, and we may end up doing that).  A query associated with the result table will add that needful data
 
-
-module.exports = function (sequelize, DataTypes) {
-  var Author = sequelize.define("Author", {
+module.exports = function(sequelize, DataTypes) {
+  let Author = sequelize.define("Author", {
     // Giving the Author model a name of type STRING
     name: DataTypes.STRING
   });
 
-  Author.associate = function (models) {
+  Author.associate = function(models) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
     Author.hasMany(models.Post, {
@@ -26,8 +24,3 @@ module.exports = function (sequelize, DataTypes) {
 
   return Author;
 };
-
-
-
-
-
