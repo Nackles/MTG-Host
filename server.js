@@ -7,6 +7,8 @@ let exphbs = require("express-handlebars");
 
 // Setting up port and requiring models for syncing
 let PORT = process.env.PORT || 8080;
+// Heroki may require a tweak to the port to listen on:
+// const PORT = process.env.PORT || process.argv[2] || 8080;
 let db = require("./models");
 
 // Creating express app and configuring middleware needed for authentication
