@@ -1,0 +1,12 @@
+token+ modal:
+
+on submit:
+
+tokenObject: {
+    name: $("#token-name).val().trim()
+    colors: $("#token-colors).val()
+    types: $("#token-types).val().trim()
+    p: parseInt($("#token-power).val()trim())
+    t: parseInt($("#token-toughness).val().trim())
+    rules: $("#token-rules").val.trim()
+}
