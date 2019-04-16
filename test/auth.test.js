@@ -9,14 +9,14 @@ let expect = chai.expect;
 
 chai.use(chaiHttp);
 let request = "";
-describe("User Signup", () => {
+describe("User signup and sign-in tests:", () => {
   beforeEach(() => {
     request = chai.request(server);
     db.users.destroy({ where: {} });
     db.users.create({ username: "Bob", password: "password" });
   });
 
-  // Test the /api/login route
+  // Test for signing up a new user
   describe("/api/signup", () => {
     it("should create a new user", done => {
       let user = {
@@ -35,8 +35,9 @@ describe("User Signup", () => {
     });
   });
 
+  // Passing test for the login route (correct authentication)
   describe("/api/login", () => {
-    it("should authenticate a user", done => {
+    it("should authenticate user", done => {
       let user = {
         username: "Bob",
         password: "password"
@@ -53,8 +54,9 @@ describe("User Signup", () => {
     });
   });
 
+  // Failing test for the login route (incorrect authentication)
   describe("/api/login", () => {
-    it("should not authenticate a user and redirect to home", done => {
+    it("should not authenticate user and redirect to home", done => {
       let user = {
         username: "Bob",
         password: "pasword"

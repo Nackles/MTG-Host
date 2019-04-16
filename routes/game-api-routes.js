@@ -34,7 +34,8 @@ module.exports = function(app) {
   // creating game and establishing initial parameters.  Starting data is player1_id (and, if we elect to go this route, how many players)
   app.post("/api/games", function(req, res) {
     db.game.create(req.body).then(function(dbGame) {
-      res.json(dbGame);
+      res.render("arena", dbGame);
+      // res.json(dbGame);
     });
   });
 

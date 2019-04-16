@@ -2,6 +2,7 @@
 // THEN we need to write username, password, and user.id to PLAYER {Player is the table that is the player profile, where they can change their token image and whatever other player specific is in there}
 
 function createUser(event) {
+  // TODO: Create Jquery
   event.preventDefault();
   // Wont submit the post if we are missing a body, title, or author
   if (!userName.val().trim() || !passWord.val().trim()) {
