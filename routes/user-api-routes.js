@@ -5,10 +5,10 @@ module.exports = function(app) {
     // There may not be a need to show all users other than in an admin capacity
     db.users
       .findAll({
-        include: [db.user]
+        include: [db.users]
       })
-      .then(function(dbUser) {
-        res.json(dbUser);
+      .then(function(dbUsers) {
+        res.json(dbUsers);
       });
   });
 
@@ -20,15 +20,15 @@ module.exports = function(app) {
           id: req.params.id
         }
       })
-      .then(function(dbUser) {
-        res.json(dbUser);
+      .then(function(dbUsers) {
+        res.json(dbUsers);
       });
   });
 
   // creating user and adding username and password
   app.post("/api/users", function(req, res) {
-    db.users.create(req.body).then(function(dbUser) {
-      res.json(dbUser);
+    db.users.create(req.body).then(function(dbUsers) {
+      res.json(dbUsers);
     });
   });
 
@@ -53,8 +53,8 @@ module.exports = function(app) {
           id: req.params.id
         }
       })
-      .then(function(dbUser) {
-        res.json(dbUser);
+      .then(function(dbUsers) {
+        res.json(dbUsers);
       });
   });
 };

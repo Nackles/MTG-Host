@@ -5,25 +5,25 @@ let db = require("../models");
 module.exports = function(app) {
   app.get("/api/tokens", function(req, res) {
     // This would be an admin dashboard of all tokens in progress.  In real life this would be kept secure/secret
-    db.token
+    db.tokens
       .findAll({
-        include: [db.token]
+        include: [db.tokens]
       })
-      .then(function(dbToken) {
-        res.json(dbToken);
+      .then(function(dbTokens) {
+        res.json(dbTokens);
       });
   });
 
   app.get("/api/tokens/:id", function(req, res) {
     // This will get real time update info for all clients
-    db.token
+    db.tokens
       .findOne({
         where: {
           id: req.params.id
         }
       })
-      .then(function(dbToken) {
-        res.json(dbToken);
+      .then(function(dbTokens) {
+        res.json(dbTokens);
       });
   });
 };

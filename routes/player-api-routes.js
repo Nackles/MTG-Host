@@ -5,58 +5,58 @@ let db = require("../models");
 module.exports = function(app) {
   app.get("/api/players", function(req, res) {
     // This would be an admin dashboard of all players in progress.  In real life this would be kept secure/secret
-    db.player
+    db.players
       .findAll({
-        include: [db.player]
+        include: [db.players]
       })
-      .then(function(dbPlayer) {
-        res.json(dbPlayer);
+      .then(function(dbplayers) {
+        res.json(dbplayers);
       });
   });
 
   app.get("/api/players/:id", function(req, res) {
     // This would be a "Show Profile" type screen
-    db.player
+    db.players
       .findOne({
         where: {
           id: req.params.id
         }
       })
-      .then(function(dbPlayer) {
-        res.json(dbPlayer);
+      .then(function(dbplayers) {
+        res.json(dbplayers);
       });
   });
 
-  // creating player and establishing initial parameters => however, as it stands now, we are creating the player record right after the username is created
-  app.player("/api/players", function(req, res) {
-    db.player.create(req.body).then(function(dbPlayer) {
-      res.json(dbPlayer);
+  // creating players and establishing initial parameters => however, as it stands now, we are creating the players record right after the username is created
+  app.players("/api/players", function(req, res) {
+    db.players.create(req.body).then(function(dbplayers) {
+      res.json(dbplayers);
     });
   });
 
-  // PUT route for updating players -- If we edit player name we will want to update player login username (maybe?)
+  // PUT route for updating players -- If we edit players name we will want to update players login username (maybe?)
   app.put("/api/players", function(req, res) {
-    db.player
+    db.players
       .update(req.body, {
         where: {
           id: req.body.id
         }
       })
-      .then(function(dbplayer) {
-        res.json(dbplayer);
+      .then(function(dbplayers) {
+        res.json(dbplayers);
       });
   });
 
-  // Not likely we would delete player ids, but here it in just in case
+  // Not likely we would delete players ids, but here it in just in case
   app.delete("/api/players/:id", function(req, res) {
-    db.player
+    db.players
       .destroy({
         where: {
           id: req.params.id
         }
       })
-      .then(function(dbPlayer) {
-        res.json(dbPlayer);
+      .then(function(dbplayers) {
+        res.json(dbplayers);
       });
   });
 };
