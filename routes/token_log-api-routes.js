@@ -46,7 +46,7 @@ module.exports = function(app) {
 
   // PUT route for updating token_log.  The only thing for now we expect to update is "tapped."  Other than that we should have a static table
   app.put("/api/token_logs", function(req, res) {
-    db.player
+    db.token_log
       .update(req.body, {
         where: {
           id: req.body.id

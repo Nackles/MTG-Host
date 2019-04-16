@@ -1,6 +1,5 @@
 drop view winloss;
 create view winloss as 
-
 select player.id, player.name as player, player.img_link as icon,
 (select count(*) from result where player.id = result.player_id and result.outcome = 'W') as w,
 (select count(*) from result where player.id = result.player_id and result.outcome = 'L') as l,
