@@ -13,46 +13,66 @@ let db = require("../models");
 module.exports = function(app) {
   app.get("/api/games", function(req, res) {
     // This would be an admin dashboard of all games in progress.  In real life this would be kept secure/secret
-    db.game.findAll({}).then(function(dbGame) {
+    db.games.findAll({}).then(function(dbGame) {
       res.json(dbGame);
     });
   });
 
   app.get("/api/games/:id", function(req, res) {
     // This will get real time update info for all clients
-    db.game
+    db.games
       .findOne({
         where: {
           id: req.params.id
         }
       })
-      .then(function(dbGame) {
-        res.json(dbGame);
+      .then(async function(dbGame) {
+        let game = dbGame.dataValues;
+        let players = [];
+        if (game.player1_id) {
+          let player = await getPlayer(game.player1_id);
+          players.push(player[0].dataValues);
+        }
+        if (game.player2_id) {
+          let player = await getPlayer(game.player2_id);
+          players.push(player[0].dataValues);
+        }
+        if (game.player3_id) {
+          let player = await getPlayer(game.player3_id);
+          players.push(player[0].dataValues);
+        }
+        if (game.player4_id) {
+          let player = await getPlayer(game.player4_id);
+          players.push(player[0].dataValues);
+        }
+        res.render("arena", { game: game, players: players }); // TODO: Player needs icon, tokens, stats, poison. Breaks functionality at moment
       });
   });
 
   // creating game and establishing initial parameters.  Starting data is player1_id (and, if we elect to go this route, how many players)
   app.post("/api/games", function(req, res) {
-    db.game.create(req.body).then(function(dbGame) {
-      res.render("arena", dbGame);
+    db.games.create(req.body).then(function(dbGame) {
+      res.redirect(`/api/games/${dbGame.dataValues.id}`);
       // res.json(dbGame);
     });
   });
 
   // PUT route for updating games.  We are going to update, depending on the flow of the game, most of the fields in the table, using this
   app.put("/api/games", function(req, res) {
-    db.Post.update(req.body, {
-      where: {
-        id: req.body.id
-      }
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
+    db.games
+      .update(req.body, {
+        where: {
+          id: req.body.id
+        }
+      })
+      .then(function() {
+        res.redirect(`/api/games/${req.body.id}`);
+      });
   });
 
   // Not likely we would delete game ids, but here it in just in case
   app.delete("/api/games/:id", function(req, res) {
-    db.game
+    db.games
       .destroy({
         where: {
           id: req.params.id
@@ -63,3 +83,7 @@ module.exports = function(app) {
       });
   });
 };
+
+function getPlayer(uid) {
+  return db.players.findAll({ where: { id: uid } });
+}

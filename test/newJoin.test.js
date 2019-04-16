@@ -1,7 +1,5 @@
 process.env.NODE_ENV = "test";
 
-let db = require("../models");
-
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 let server = require("../server");
@@ -9,41 +7,62 @@ let expect = chai.expect;
 
 chai.use(chaiHttp);
 let request = "";
-describe("User signup and sign-in tests:", () => {
+describe("User creating and joining games tests:", () => {
   beforeEach(() => {
     request = chai.request(server);
-    db.users.destroy({ where: {} });
-    db.users.create({ username: "Bob", password: "password" });
   });
 
+  // Authenticates a user
+  describe("/api/signup", () => {
+    it("should create a new user", done => {
+      let user = {
+        username: "Nick",
+        password: "password"
+      };
+      request
+        .post("/api/signup")
+        .send(user)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res).to.be.a("object");
+          done();
+        });
+    });
+  });
+
+  // User creates a game. This needs to be seeded with game information
   describe("User creates a new game", () => {
     it("should add a new game object to the database", done => {
+      let newGame = {
+        player1_id: 1,
+        life1: 20
+      };
       request
-        .post("/api/login")
-        .send({ username: "Bob", password: "password" })
-        .end(err => {
+        .post("/api/games")
+        .send(newGame)
+        .end((err, res) => {
           expect(err).to.be.null;
-          addGame(request, done);
+          expect(res).to.be.a("object");
+          expect(res.res.text).to.contain("PLAYER LIFE TRACKER");
+          done();
+        });
+    });
+  });
+
+  // Second user joins a game
+  describe("Player 2 joins a new game", () => {
+    it("should add a player to the game and send them in to the lobby", done => {
+      let player = { id: 1, player2_id: 2, life2: 20 };
+      request
+        .put("/api/games")
+        .send(player)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.be.a("object");
+          expect(res.res.text).to.contain("PLAYER LIFE TRACKER");
+          done();
         });
     });
   });
 });
-
-/**
- *
- * @param {object} request The request object created by chai.request(server)
- * @param {function} cb Callback function to be run after completion that is being passed the request object
- */
-function addGame(cb) {
-  let newGame = {}; // TODO: Update with the values that would be put into the database once the model is working for games
-  chai
-    .request(server)
-    .post("/api/games")
-    .send(newGame)
-    .end((err, res) => {
-      expect(err).to.be.null;
-      expect(res).to.be.a("object");
-      expect(res.res.text).to.contain("PLAYER LIFE TRACKER");
-      cb(request);
-    });
-}

@@ -9,7 +9,7 @@
   "test": {
     "username": "vsc",
     "password": "vscode",
-    "database": "mtg_ben",
+    "database": "mtg_test",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false

@@ -8,40 +8,40 @@
 // - There shouldn't be any need to store token info here, it should be able to be managed only in token and token log.  From there you can show what tokens were played, by whom, and on what game
 // Queries needed: 5 Insert record for new game, update record to add players, update record to adjust life, update record to to trigger game start , update record to set end game info (these things *could* be stored only in results table, and we may end up doing that).  A query associated with the result table will add that needful data
 
-// module.exports = function(sequelize, DataTypes) {
-//   let game = sequelize.define("game", {
-//     player1_id: {
-//       type: DataTypes.INTEGER,
-//       references: { model: player, key: "id" }
-//     },
-//     player2_id: {
-//       type: DataTypes.INTEGER,
-//       references: { model: player, key: "id" }
-//     },
-//     player3_id: {
-//       type: DataTypes.INTEGER,
-//       references: { model: player, key: "id" }
-//     },
-//     player4_id: {
-//       type: DataTypes.INTEGER,
-//       references: { model: player, key: "id" }
-//     },
-//     life1: DataTypes.INTEGER,
-//     life2: DataTypes.INTEGER,
-//     life3: DataTypes.INTEGER,
-//     life4: DataTypes.INTEGER,
-//     duration: DataTypes.TIME,
-//     game_started: { type: DataTypes.TIMESTAMP, defaultValue: null },
-//     is_active: { type: DataTypes.TIMESTAMP, defaultValue: true },
-//     accept_new: { type: DataTypes.TIMESTAMP, defaultValue: true },
-//     winner_id: {
-//       type: DataTypes.INTEGER,
-//       references: { model: player, key: "id" }
-//     }
-//   });
+module.exports = function(sequelize, DataTypes) {
+  let games = sequelize.define("games", {
+    player1_id: {
+      type: DataTypes.INTEGER,
+      references: { model: "players", key: "id" }
+    },
+    player2_id: {
+      type: DataTypes.INTEGER,
+      references: { model: "players", key: "id" }
+    },
+    player3_id: {
+      type: DataTypes.INTEGER,
+      references: { model: "players", key: "id" }
+    },
+    player4_id: {
+      type: DataTypes.INTEGER,
+      references: { model: "players", key: "id" }
+    },
+    life1: DataTypes.INTEGER,
+    life2: DataTypes.INTEGER,
+    life3: DataTypes.INTEGER,
+    life4: DataTypes.INTEGER,
+    duration: DataTypes.TIME,
+    game_started: { type: DataTypes.TIME, defaultValue: null },
+    is_active: { type: DataTypes.TIME, defaultValue: true },
+    accept_new: { type: DataTypes.TIME, defaultValue: true },
+    winner_id: {
+      type: DataTypes.INTEGER,
+      references: { model: "players", key: "id" }
+    }
+  });
 
-//   return game;
-// };
+  return games;
+};
 
 // id INT NOT NULL AUTO_INCREMENT,
 // player1_id INT,

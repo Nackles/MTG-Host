@@ -23,8 +23,20 @@ module.exports = function(app) {
         username: req.body.username,
         password: req.body.password
       })
-      .then(function() {
-        res.redirect(307, "/api/login");
+      .then(function(data) {
+        db.players
+          .create({
+            user_id: data.dataValues.id,
+            name: data.dataValues.username
+          })
+          .then(() => {
+            res.redirect(307, "/api/login");
+          })
+          .catch(function(err) {
+            console.log(err);
+            res.json(err);
+            // res.status(422).json(err.errors[0].message);
+          });
       })
       .catch(function(err) {
         console.log(err);

@@ -29,18 +29,19 @@
     <!-- player info trays -->
     <!-- RULE: P1 tab is never disabled - P2/3/4 starts disabled and enable as players connect -->
     {{#each players}}
-    <div id="{{this.id}}" class="col s12 player-tray">
+    <div id="{{id}}" class="col s12 player-tray">
         <!-- once complete, handlebars the below per player -->
         <!-- player 1 -->
-        <div id="{{this.id}}-info">
-            <div class="valign-wrapper"><i class="small material-icons">{{this.icon}}</i>
-                <p>{{this.name}}</p>
+        <div id="{{id}}-info">
+            <div class="valign-wrapper"><i class="small material-icons">{{icon}}</i>
+                <p>{{name}}</p>
             </div>
         </div>
-        <div id="p{{this.id}}-stats">jQuery updates all stats (W/L) inline, ONCE on-login{{{this.stats}}</div>
-        <span id="p{{this.id}}-life">Life: {{this.life}}</span><span id="spacer-span"> </span><span id="p{{{this.id}}-poison">Poison: {{this.poison}}</span>
+        <div id="p{{id}}-stats">jQuery updates all stats (W/L) inline, ONCE on-login{{{stats}}</div>
+        <span id="p{{id}}-life">Life: {{life}}</span><span id="spacer-span"> </span><span id="p{{{id}}-poison">Poison:
+            {{poison}}</span>
         <div class="divider"></div>
-        <div id="p{{this.id}}-tokens">TOKENS HANDLEBARS IS HERE {{this.tokens}}
+        <div id="p{{id}}-tokens">TOKENS HANDLEBARS IS HERE {{tokens}}
         </div>
     </div>
     {{/each}}

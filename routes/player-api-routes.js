@@ -5,7 +5,7 @@ let db = require("../models");
 module.exports = function(app) {
   app.get("/api/players", function(req, res) {
     // This would be an admin dashboard of all players in progress.  In real life this would be kept secure/secret
-    db.player
+    db.players
       .findAll({
         include: [db.player]
       })
@@ -16,7 +16,7 @@ module.exports = function(app) {
 
   app.get("/api/players/:id", function(req, res) {
     // This would be a "Show Profile" type screen
-    db.player
+    db.players
       .findOne({
         where: {
           id: req.params.id
@@ -28,15 +28,15 @@ module.exports = function(app) {
   });
 
   // creating player and establishing initial parameters => however, as it stands now, we are creating the player record right after the username is created
-  app.player("/api/players", function(req, res) {
-    db.player.create(req.body).then(function(dbPlayer) {
+  app.post("/api/players", function(req, res) {
+    db.players.create(req.body).then(function(dbPlayer) {
       res.json(dbPlayer);
     });
   });
 
   // PUT route for updating players -- If we edit player name we will want to update player login username (maybe?)
   app.put("/api/players", function(req, res) {
-    db.player
+    db.players
       .update(req.body, {
         where: {
           id: req.body.id
@@ -49,7 +49,7 @@ module.exports = function(app) {
 
   // Not likely we would delete player ids, but here it in just in case
   app.delete("/api/players/:id", function(req, res) {
-    db.player
+    db.players
       .destroy({
         where: {
           id: req.params.id
