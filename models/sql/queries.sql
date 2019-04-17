@@ -7,12 +7,11 @@ games g
 left join players p on g.winner_id = p.id;
 
 -- QUERY TO PULL ALL TOKENS PLAYED IN GAMES
-select tl.game_id as GameID, p.name as TokenPutBy, t.name as TokenPut, t.color, t.type, t.pt,t.abilities,  tl.updated_at as DateTimePlayed
+select tl.game_id as GameID, p.name as TokenPutBy, t.name as TokenPut, t.color, t.type, t.pt,t.text as abilities,  tl.updated_at as DateTimePlayed
 from token_logs tl
 left join games g on tl.game_id = g.id
 left join players p on tl.player_id = p.id
 left join tokens t on tl.token_id = t.id
-where g.id = 1 and p.id = 4
 ;
 -- QUERY TO RETURN WINNERS AND LOSERS OF EACH MATCH IN DASHBOARD FORMAT (need to add a parameter for dropped game match to track the rage quitters!).  This could be used for admins who need a 
 -- dashboard of all games in process to monitor network stats.  Also could be used for regular data collection
@@ -35,12 +34,12 @@ left join (select id, name from players) as winner_sub on g.winner_id = winner_s
 ;
 -- QUERY TO GET WIN/LOSS RESULTS
 select players.name as MagicPlayer, players.img_link as icon,
-(select @X := count(*) from results where players.id = results.player_id and results.outcome = 'W') as W,
-(select @Y := count(*) from results where players.id = results.player_id and results.outcome = 'L') as L,
+(select @X := count(*) from result where players.id = results.player_id and results.outcome = 'W') as W,
+(select @Y := count(*) from result where players.id = results.player_id and results.outcome = 'L') as L,
 round((@X / (@X + @Y)),3) as Pct, @X + @Y as NumGames,
 (select max(updated_at) from results where players.id = results.player_id and results.outcome in ('W','L')) as LastPlayed,
-(select round(avg(duration)/60) from results where players.id = results.player_id and results.outcome in ('W','L')) as AvgDurationMins
-from players
+(select round(avg(duration)/60) from results where players.id = results.player_id and result.outcome in ('W','L')) as AvgDurationMins
+from player
 order by Pct desc
 ;
 

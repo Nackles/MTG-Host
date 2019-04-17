@@ -18,7 +18,8 @@ module.exports = function(app) {
       .findAll({
         where: {
           game_id: req.params.game
-        }
+        },
+        include: [db.tokens]
       })
       .then(function(dbTokenLogs) {
         res.json(dbTokenLogs);
