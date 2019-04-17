@@ -12,11 +12,11 @@ module.exports = function(app) {
     res.render("index");
   });
 
-  app.get("/lobby", function(req, res) {
+  app.get("/lobby", isAuthenticated, function(req, res) {
     res.render("lobby");
   });
 
-  app.get("/arena/:gameId", function(req, res) {
+  app.get("/arena/:gameId", isAuthenticated, function(req, res) {
     log(req.params.gameId);
     db.games.findOne({ where: { id: req.params.gameId } }).then(data => {
       log(data);
@@ -29,6 +29,7 @@ module.exports = function(app) {
   app.post("/arena/join", isAuthenticated, function(req, res) {
     let gameId = req.body.id;
     let player = "";
+    let life = "";
     db.games
       .findOne({ where: { id: gameId } })
       .then(data => {
@@ -36,6 +37,7 @@ module.exports = function(app) {
         for (let i = 2; i < 5; i++) {
           if (!game[`player${i}_id`]) {
             player = `player${i}_id`;
+            life = `life${i}`;
             return;
           }
         }
@@ -43,7 +45,10 @@ module.exports = function(app) {
       })
       .then(() => {
         db.games
-          .update({ [player]: req.user.id }, { where: { id: req.body.id } })
+          .update(
+            { [player]: req.user.id, [life]: 20 },
+            { where: { id: req.body.id } }
+          )
           .then(() => {
             res.redirect(`/arena/${gameId}`);
           });
@@ -55,5 +60,9 @@ module.exports = function(app) {
       link = `/arena/${data.dataValues.id}`;
       res.redirect(link);
     });
+  });
+
+  app.get("*", function(req, res) {
+    res.render("404");
   });
 };
