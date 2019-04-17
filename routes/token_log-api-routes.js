@@ -12,17 +12,6 @@ module.exports = function(app) {
       });
   });
 
-  // This will get all the loaded tokens (500+?) for the player to choose from (maybe an autocomplete field on the client side?)
-  app.get("/api/token_logs/", function(req, res) {
-    db.token_logs
-      .findAll({
-        // No parameters here, just grab all of them
-      })
-      .then(function(dbTokenLogs) {
-        res.json(dbTokenLogs);
-      });
-  });
-
   // This will get real time update info for all clients (tokens played/tapped by game, by player).  Hypothetically we could pull all for  given game, and then filter the results by player on the client side
   app.get("/api/token_logs/:id:game", function(req, res) {
     db.token_logs

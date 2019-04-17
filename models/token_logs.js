@@ -21,6 +21,37 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
+  token_logs.associate = function (models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    token_logs.belongsTo(models.games, {
+      forignKey: 'game_id'
+      onDelete: 'no action'
+      onUpdate: 'no action'
+    });
+  };
+
+  token_logs.associate = function (models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    token_logs.belongsTo(tokens.players, {
+      forignKey: 'token_id'
+      onDelete: 'no action'
+      onUpdate: 'no action'
+    });
+  };
+
+  token_logs.associate = function (models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    token_logs.belongsTo(models.games, {
+      forignKey: 'game_id'
+      onDelete: 'no action'
+      onUpdate: 'cascade'
+    });
+  };
+
+
   return token_logs;
 };
 

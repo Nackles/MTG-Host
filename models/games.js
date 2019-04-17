@@ -31,9 +31,9 @@ module.exports = function(sequelize, DataTypes) {
     life3: DataTypes.INTEGER,
     life4: DataTypes.INTEGER,
     duration: DataTypes.TIME,
-    game_started: { type: DataTypes.TIMESTAMP, defaultValue: null },
-    is_active: { type: DataTypes.TIMESTAMP, defaultValue: true },
-    accept_new: { type: DataTypes.TIMESTAMP, defaultValue: true },
+    game_started: { type: DataTypes.TIME, defaultValue: null },
+    is_active: { type: DataTypes.BOOLEAN, defaultValue: true },
+    accept_new: { type: DataTypes.BOOLEAN, defaultValue: true },
     winner_id: {
       type: DataTypes.INTEGER
       // references: { model: player, key: "id" }

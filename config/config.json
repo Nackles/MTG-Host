@@ -1,14 +1,14 @@
 {
   "development": {
-    "username": "vsc",
-    "password": "vscode",
+    "username": "root",
+    "password": null,
     "database": "mtg_ben",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
-    "username": "vsc",
-    "password": "vscode",
+    "username": "root",
+    "password": null,
     "database": "mtg_test",
     "host": "localhost",
     "dialect": "mysql",
