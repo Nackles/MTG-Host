@@ -7,8 +7,8 @@
 
                 <div class="collapsible-body"><span>ENTER INTO THE TOKEN TRAY!</span>
                         <div class="life-collection">
-                                <span id="{{id}}-life-change" class="right"><input type="submit" class="link-color" href="#"
-                                                value="Change Life"></span>
+                                <span id="{{id}}-life-change" class="right"><input type="submit" class="link-color"
+                                                href="#" value="Change Life"></span>
                                 <form action="#">
                                         <p class="range-field">
                                                 <input type="range" id="{{id}}-life-range" min="-20" max="20" />
@@ -18,29 +18,36 @@
                         </div>
 
                         <p>Set the slider to life gained or lost, and press 'Life Change' to gain or lose that much
-                        life.</p>
+                                life.</p>
                         <div class="divider purple"></div>
-                                                <h5 class="center-align">Token Tray</h5>
+                        <h5 class="center-align">Token Tray</h5>
 
                         <div id="{{id}}-tokens-active" class="container">
-<div class="carousel">
-        {{#each tokens}}
-        <div class="carousel-item {{name}}"><span id="{{name}}-{{@index}}">{{name}}</span><img
-                        src="{{img}}"></div>
-        {{/each}}
-</div>
+                                <div class="carousel">
+                                        {{#each tokens}}
+                                        <div class="carousel-item {{name}}"><span
+                                                        id="{{name}}-{{@index}}">{{name}}</span><img src="{{img}}">
+                                        </div>
+                                        {{/each}}
+                                </div>
                         </div>
 
                 </div>
         </li>
         {{/each}}
 </ul>
-
+                                <a id="{{id}}-t-spawn" class="btn modal-trigger" href="#tokens-modal">Tokens +</a>
 
 <!-- Tokens -->
 <div id="tokens-modal" class="modal">
         <div class="modal-content">
-                <h4 class="center-align">Select Token</h4>
+                        <div class="input-field">
+                                <input placeholder="Token search" id="first_name" type="text" class="validate">
+                                <a class="btn" id="token-search">Search</a>
+                        </div>
+                <h4 class="center-align">...and select from results below!</h4>
+                {{#each token_result}}
+                {{/each}}
         </div>
         <div class="modal-footer">
                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Add Token</a>
