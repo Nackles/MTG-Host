@@ -7,17 +7,83 @@
 
   {{!-- Styling --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
-
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/styles/mtghost.css" media="screen" title="no title" charset="utf-8">
+
 
 </head>
 
 <body>
-  {{{body}}}
+  <div class="container">
+    {{{body}}}
+  </div>
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="/js/index.js"></script>
   <script src="/js/joinarena.js"></script>
+
+  {{!-- Click handlers and initializations --}}
+  <script>
+    $(document).ready(function () {
+      $('.collapsible').collapsible();
+      $('.modal').modal();
+
+      // Before allowImgReset, clicking ANYWHERE in .collapsible would reset the carousel to the first image in an annoying enough way that users might not use the app - this fixed that by only allowing one .carousel initiialization.
+      let allowImgReset = true;
+      $(".collapsible").on("click", function () {
+        if (allowImgReset === true) {
+          $('.carousel').carousel();
+          allowImgReset = false;
+        }
+      })
+
+      // When the Token + button is clicked, change the ID in the modal to the modal of the player selected, then open the modal
+      $(".tokens-select").on("click", function () {
+        $("#tokens-spawn").attr("id") = $(this).attr("id")
+        $("#tokens-modal").modal('open');
+      })
+
+
+
+
+      $('input.autocomplete').autocomplete({
+        data: {
+          "White": null,
+          "Black": null,
+          "Green": null,
+          "Red": null,
+          "Blue": null,
+          "White Blue": null,
+          "Blue Black": null,
+          "Black Red": null,
+          "Red Green": null,
+          "Green White": null,
+          "White Black": null,
+          "Blue Red": null,
+          "Black Green": null,
+          "Red White": null,
+          "Green Blue": null,
+          "Red Green Black": null,
+          "White Green Blue": null,
+          "Black Red Blue": null,
+          "Green White Red": null,
+          "Blue White Black": null,
+          "Blue Red White": null,
+          "Red White Black": null,
+          "Black Green Blue": null,
+          "Green Blue Red": null,
+          "White Black Green": null,
+          "White Black Red Green": null,
+          "White Black Red Blue": null,
+          "White Black Green Blue": null,
+          "White Red Green Blue": null,
+          "Black Red Green Blue": null,
+        },
+      });
+    });
+  </script>
 </body>
 
 </html>

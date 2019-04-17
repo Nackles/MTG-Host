@@ -8,10 +8,9 @@ module.exports = function(app) {
   // Otherwise the user will be sent an error
   app.post(
     "/api/login",
-    passport.authenticate({
+    passport.authenticate("local", {
       successRedirect: "/lobby",
-      failureRedirect: "/",
-      failureFlash: true
+      failureRedirect: "/"
     })
   );
 
@@ -19,13 +18,25 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
-    console.log(req.body);
-    db.User.create({
-      username: req.body.username,
-      password: req.body.password
-    })
-      .then(function() {
-        res.redirect(307, "/api/login");
+    db.users
+      .create({
+        username: req.body.username,
+        password: req.body.password
+      })
+      .then(function(data) {
+        db.players
+          .create({
+            user_id: data.dataValues.id,
+            name: data.dataValues.username
+          })
+          .then(() => {
+            res.redirect(307, "/api/login");
+          })
+          .catch(function(err) {
+            console.log(err);
+            res.json(err);
+            // res.status(422).json(err.errors[0].message);
+          });
       })
       .catch(function(err) {
         console.log(err);

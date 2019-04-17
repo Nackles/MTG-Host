@@ -1,0 +1,89 @@
+token+ modal:
+
+on submit:
+
+tokenObject: {
+    name: $("#token-name).val().trim()
+    colors: $("#token-colors).val()
+    types: $("#token-types).val().trim()
+    p: parseInt($("#token-power).val()trim())
+    t: parseInt($("#token-toughness).val().trim())
+    rules: $("#token-rules").val.trim()
+}
+
+FOR THE CSV:
+
+filter One:
+go line-by-line and if ((name)&&(color)&&(type)) { add that ENTIRE line to tokens_object }
+
+//may not be necessary
+filter Two:
+for tokens.length {
+    if ((tokens_object[i].name === tokens_object[i+1].name) && (tokens_object[i].artist === tokens_object[i+1].artist)) {
+        tokens_object[i+1].slice(1,0)
+    }
+}
+
+
+# Arena
+When a new player enters the Arena, a life total is changed, or a token is added, arena expects:
+game {
+    players {
+        player1_id {
+            id, name, life, poison, tokens {
+                name, colors, types, pt, text, img
+            }
+        }
+        player2_id{...}
+    }
+}
+
+# Hard coded player tray example
+<li>
+                <div class="collapsible-header"><i class="material-icons">place</i><span id="1-player">Player
+                                2</span>---<span id="1-life">20</span>---<span id="1-poison">0</span></div>
+
+                <div class="collapsible-body">
+                        <div class="life-collection">
+
+                                <span id="{{this.id}}-life-change" class="right"><input type="submit" class="link-color"
+                                                href="#" value="Change Life"></span>
+                                <form action="#">
+                                        <p class="range-field">
+                                                <input type="range" id="{{this.id}}-life-range" min="-20" max="20" />
+                                        </p>
+                                </form>
+                                <span id="{{this.id}}-tokens-spawn"><input type="submit" class="link-color"
+                                                href="#tokens-modal" value="Token +"></a></span>
+                        </div>
+
+
+                        <p>Set the slider to life gained or lost, and press 'Life Change' to gain or lose that much
+                                life.</p>
+                        <div class="divider purple"></div>
+                        <h5 class="center-align">Token Tray</h5>
+                        <div class="container" id="{{this.id}}-tokens-active">
+
+                                <div class="carousel">
+                                        {{#each this.tokens}}
+                                        <div class="carousel-item {{this.name}}"><span
+                                                        id="{{this.name}}-{{@index}}">{{this.name}}</span><img
+                                                        src="{{this.img}}"></div>
+                                        {{/each}}
+                                        <div class="carousel-item"><img
+                                                        src="https://tokens.mtg.onl/tokens/IMA_004-Djinn-Monk.jpg">
+                                        </div>
+                                        <div class="carousel-item"><img
+                                                        src="https://tokens.mtg.onl/tokens/UST_004-Faerie-Spy.jpg">
+                                        </div>
+                                        <div class="carousel-item"><img
+                                                        src="https://tokens.mtg.onl/tokens/RIX_004-Golem.jpg">
+                                        </div>
+                                </div>
+
+
+                        </div>
+                </div>
+                </div>
+        </li>
+
