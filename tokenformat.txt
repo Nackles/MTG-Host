@@ -10,3 +10,16 @@ tokenObject: {
     t: parseInt($("#token-toughness).val().trim())
     rules: $("#token-rules").val.trim()
 }
+
+FOR THE CSV:
+
+filter One:
+go line-by-line and if ((name)&&(color)&&(type)) { add that ENTIRE line to tokens_object }
+
+//may not be necessary
+filter Two:
+for tokens.length {
+    if ((tokens_object[i].name === tokens_object[i+1].name) && (tokens_object[i].artist === tokens_object[i+1].artist)) {
+        tokens_object[i+1].slice(1,0)
+    }
+}

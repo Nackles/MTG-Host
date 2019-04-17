@@ -8,7 +8,6 @@
   {{!-- Styling --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="/styles/mtghost.css" media="screen" title="no title" charset="utf-8">
 
@@ -20,42 +19,27 @@
     {{{body}}}
   </div>
 
-  {{!-- THIS MODAL IS DEPRECATED - TOKEN DATABASE CAN REPLACE --}}
-  {{!-- Token+ Modal --}}
-  <div id="tokens-modal" class="modal">
-    <div class="modal-content">
-      <h4>Token Spawner</h4>
-      {{!-- Token Name --}}
-      <div class="input-field">
-        <input placeholder="Angel" id="token-name" type="text" class="validate">
-        <label for="token-name">Token Name</label>
-      </div>
-      {{!-- Token Colors --}}
-      <div class="input-field">
-        <i class="material-icons prefix">palette</i>
-        <input type="text" id="token-colors" class="autocomplete">
-        <label for="token-colors">Token Color(s)</label>
-      </div>
-      {{!-- Token Types --}}
-      <div class="input-field">
-        <input placeholder="Creature - Angel" id="token-types" type="text" class="validate">
-        <label for="token-types">Token Type(s)</label>
-      </div>
-      {{!-- Token Power / Toughness --}}    
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Add to tray</a>
-    </div>
-  </div>
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="/js/index.js"></script>
   <script src="/js/joinarena.js"></script>
+
   {{!-- Click handlers for tabs --}}
   <script>
     $(document).ready(function () {
-      $(".tabs").tabs();
+      $('.collapsible').collapsible();
       $('.modal').modal();
+
+      // Before allowImgReset, clicking ANYWHERE in .collapsible would reset the carousel to the first image in an annoying enough way that users might not use the app - this fixed that by only allowing one .carousel initiialization.
+      let allowImgReset = true;
+      $(".collapsible").on("click", function () {
+        if (allowImgReset === true){
+        $('.carousel').carousel();
+        allowImgReset = false;
+        }
+      })
+
+
       $('input.autocomplete').autocomplete({
         data: {
           "White": null,
