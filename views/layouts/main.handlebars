@@ -47,16 +47,16 @@
 
       // Tokens array populated on startup by database pull
       var tokensArr = [];
-      $("#tokens-search").on("click", function(){
-          var searchFor = $("#search-for").val();
-          tokensArr.filter(nameSearch)
+      $("#tokens-search").on("click", function () {
+        var searchFor = $("#search-for").val();
+        tokensArr.filter(nameSearch)
 
-          function nameSearch(searched){
-            return (tokens.name)
-          }
+        function nameSearch(searched) {
+          return (tokens.name)
+        }
 
 
-        
+
       })
 
     });
