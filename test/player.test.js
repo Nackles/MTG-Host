@@ -6,7 +6,7 @@ let server = require("../server");
 let expect = chai.expect;
 
 chai.use(chaiHttp);
-let request = "";
+let request;
 describe("POST 3 and UPDATE 1", function() {
   //   beforeEach(function() {
   //     request = chai.request(server);
