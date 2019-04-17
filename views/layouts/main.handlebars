@@ -24,7 +24,7 @@
   <script src="/js/index.js"></script>
   <script src="/js/joinarena.js"></script>
 
-  {{!-- Click handlers for tabs --}}
+  {{!-- Click handlers and initializations --}}
   <script>
     $(document).ready(function () {
       $('.collapsible').collapsible();
@@ -33,11 +33,19 @@
       // Before allowImgReset, clicking ANYWHERE in .collapsible would reset the carousel to the first image in an annoying enough way that users might not use the app - this fixed that by only allowing one .carousel initiialization.
       let allowImgReset = true;
       $(".collapsible").on("click", function () {
-        if (allowImgReset === true){
-        $('.carousel').carousel();
-        allowImgReset = false;
+        if (allowImgReset === true) {
+          $('.carousel').carousel();
+          allowImgReset = false;
         }
       })
+
+      // When the Token + button is clicked, change the ID in the modal to the modal of the player selected, then open the modal
+      $(".tokens-select").on("click", function () {
+        $("#tokens-spawn").attr("id") = $(this).attr("id")
+        $("#tokens-modal").modal('open');
+      })
+
+
 
 
       $('input.autocomplete').autocomplete({
