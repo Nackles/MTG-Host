@@ -11,19 +11,19 @@
 module.exports = function(sequelize, DataTypes) {
   let games = sequelize.define("games", {
     player1_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
       references: { model: players, key: "id" }
     },
     player2_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
       references: { model: players, key: "id" }
     },
     player3_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
       references: { model: players, key: "id" }
     },
     player4_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
       references: { model: players, key: "id" }
     },
     life1: DataTypes.INTEGER,
@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes) {
     is_active: { type: DataTypes.BOOLEAN, defaultValue: true },
     accept_new: { type: DataTypes.BOOLEAN, defaultValue: true },
     winner_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
       references: { model: player, key: "id" }
     }
   });
