@@ -45,43 +45,20 @@
         $("#tokens-modal").modal('open');
       })
 
+      // Tokens array populated on startup by database pull
+      var tokensArr = [];
+      $("#tokens-search").on("click", function(){
+          var searchFor = $("#search-for").val();
+          tokensArr.filter(nameSearch)
+
+          function nameSearch(searched){
+            return (tokens.name)
+          }
 
 
+        
+      })
 
-      $('input.autocomplete').autocomplete({
-        data: {
-          "White": null,
-          "Black": null,
-          "Green": null,
-          "Red": null,
-          "Blue": null,
-          "White Blue": null,
-          "Blue Black": null,
-          "Black Red": null,
-          "Red Green": null,
-          "Green White": null,
-          "White Black": null,
-          "Blue Red": null,
-          "Black Green": null,
-          "Red White": null,
-          "Green Blue": null,
-          "Red Green Black": null,
-          "White Green Blue": null,
-          "Black Red Blue": null,
-          "Green White Red": null,
-          "Blue White Black": null,
-          "Blue Red White": null,
-          "Red White Black": null,
-          "Black Green Blue": null,
-          "Green Blue Red": null,
-          "White Black Green": null,
-          "White Black Red Green": null,
-          "White Black Red Blue": null,
-          "White Black Green Blue": null,
-          "White Red Green Blue": null,
-          "Black Red Green Blue": null,
-        },
-      });
     });
   </script>
 </body>
