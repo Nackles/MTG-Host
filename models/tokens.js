@@ -4,20 +4,13 @@
 module.exports = function(sequelize, DataTypes) {
   let tokens = sequelize.define("tokens", {
     name: DataTypes.STRING,
+    number: DataTypes.STRING,
     color: DataTypes.STRING,
-    type: DataTypes.STRING,
     pt: DataTypes.STRING,
-    abilities: DataTypes.STRING,
-    icon: {
-      type: DataTypes.STRING(2083),
-      allowNull: true,
-      defaultValue: "http://placeimg.com/150/150/any"
-    },
-    last_updated_by: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: "Manual Data Push"
-    }
+    promo: DataTypes.STRING,
+    type: DataTypes.STRING,
+    artist: DataTypes.STRING,
+    text: DataTypes.STRING
   });
 
   return tokens;

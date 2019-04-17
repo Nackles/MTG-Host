@@ -20,31 +20,42 @@ module.exports = function(app) {
     let data = await db.games.findOne({ where: { id: req.params.gameId } });
     let game = data.dataValues;
     let players = [];
+    // Add current players in the game
     for (let i = 1; i < 5; i++) {
       if (game[`player${i}_id`]) {
         player = game[`player${i}_id`];
         life = game[`life${i}`];
-        players.push({ ["player_id"]: player, ["life"]: life });
+        players.push({ ["player_id"]: player, ["life"]: life, tokens: [] });
       }
     }
+    // Add name to  each player
     for (let i = 0; i < players.length; i++) {
       let player = await db.players.findOne({
         where: { id: players[i].player_id }
       });
       players[i].name = player.dataValues.name;
     }
-
-    let tokens = await db.token_logs.findall({
+    let tokens = await db.token_logs.findAll({
       where: {
         game_id: req.params.gameId
       },
       include: [db.tokens]
     });
 
-    log(players);
+    // Add appropriate tokens to each player
+    for (let logs in tokens) {
+      token = tokens[logs].dataValues;
+      for (let player in players) {
+        if (players[player].player_id === token.player_id) {
+          players[player].tokens.push(token.token.dataValues);
+        }
+      }
+    }
+
+    log(players[0].tokens);
 
     res.render("arena", {
-      players: { id: 1, name: "test", life: 20, tokens: {} }
+      players: players
     }); // TODO: Object needs to contain {players:[{id:, name:, life:, tokens:{},}]}
   });
 

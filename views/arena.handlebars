@@ -1,20 +1,21 @@
 <ul class="collapsible">
     {{#each players}}
     <li>
-        <div class="collapsible-header"><i class="material-icons">place</i><span id="{{id}}-player">{{name}}</span> |
-            <span id="{{id}}-life"></span> |
-            <span id="{{id}}-poison}}"></span></div>
+        <div class="collapsible-header"><i class="material-icons">place</i><span
+                id="{{player_id}}-player">{{name}}</span> |
+            <span id="{{player_id}}-life"></span> Life: {{life}}
+            <span id="{{player_id}}-poison}}"></span></div>
 
         <div class="collapsible-body"><span>ENTER INTO THE TOKEN TRAY!</span>
             <div class="life-collection">
-                <span id="{{id}}-life-change" class="right"><input type="submit" class="link-color" href="#"
+                <span id="{{player_id}}-life-change" class="right"><input type="submit" class="link-color" href="#"
                         value="Change Life"></span>
                 <form action="#">
                     <p class="range-field">
-                        <input type="range" id="{{id}}-life-range" min="-20" max="20" />
+                        <input type="range" id="{{player_id}}-life-range" min="-20" max="20" />
                     </p>
                 </form>
-                <a id="{{id}}-t-spawn" class="btn modal-trigger" href="#tokens-modal">Tokens +</a>
+                <a id="{{player_id}}-t-spawn" class="btn modal-trigger" href="#tokens-modal">Tokens +</a>
             </div>
 
             <p>Set the slider to life gained or lost, and press 'Life Change' to gain or lose that much
@@ -22,7 +23,7 @@
             <div class="divider purple"></div>
             <h5 class="center-align">Token Tray</h5>
 
-            <div id="{{id}}-tokens-active" class="container">
+            <div id="{{player_id}}-tokens-active" class="container">
                 <div class="carousel">
                     {{#each tokens}}
                     <div class="carousel-item {{name}}"><span id="{{name}}-{{@index}}">{{name}}</span><img
