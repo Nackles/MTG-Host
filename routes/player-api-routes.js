@@ -28,7 +28,7 @@ module.exports = function(app) {
   });
 
   // creating players and establishing initial parameters => however, as it stands now, we are creating the players record right after the username is created
-  app.players("/api/players", function(req, res) {
+  app.post("/api/players", function(req, res) {
     db.players.create(req.body).then(function(dbPlayers) {
       res.json(dbPlayers);
     });
