@@ -15,7 +15,7 @@ describe("POST 3 and UPDATE 1", function() {
 
   it("Add first 2 seeds", function() {
     request = chai.request(server);
-    db.players.destroy({ where: {} });
+    // db.players.destroy({ where: {} });
     db.players.create({ user_id: 1, name: "Bronson" });
     db.players.create({
       user_id: 2,
