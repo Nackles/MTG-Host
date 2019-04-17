@@ -34,6 +34,13 @@ module.exports = function(app) {
       players[i].name = player.dataValues.name;
     }
 
+    let tokens = await db.token_logs.findall({
+      where: {
+        game_id: req.params.gameId
+      },
+      include: [db.tokens]
+    });
+
     log(players);
 
     res.render("arena", {
