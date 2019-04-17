@@ -1,5 +1,6 @@
 process.env.NODE_ENV = "test";
 
+let db = require("../models");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 let server = require("../server");
@@ -8,6 +9,9 @@ let expect = chai.expect;
 chai.use(chaiHttp);
 let request = "";
 describe("User signup and sign-in tests:", () => {
+  before(() => {
+    db.users.create({ username: "tester", password: "test" });
+  });
   beforeEach(() => {
     request = chai.request(server);
   });
@@ -35,8 +39,8 @@ describe("User signup and sign-in tests:", () => {
   describe("/api/login", () => {
     it("should authenticate user", done => {
       let user = {
-        username: "Emile",
-        password: "password"
+        username: "tester",
+        password: "test"
       };
       request
         .post("/api/login")

@@ -12,11 +12,14 @@ module.exports = function(app) {
       });
   });
 
-  // This will get all the loaded tokens (500+?) for the player to choose from (maybe an autocomplete field on the client side?)
-  app.get("/api/token_logs/", function(req, res) {
+  // Get all tokens played in a selected game
+  app.get("/api/token_logs/:game", function(req, res) {
     db.token_logs
       .findAll({
-        // No parameters here, just grab all of them
+        where: {
+          game_id: req.params.game
+        },
+        include: [db.tokens]
       })
       .then(function(dbTokenLogs) {
         res.json(dbTokenLogs);

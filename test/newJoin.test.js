@@ -34,28 +34,21 @@ describe("User creating and joining games tests:", () => {
   // User creates a game. This needs to be seeded with game information
   describe("User creates a new game", () => {
     it("should add a new game object to the database", done => {
-      let newGame = {
-        player1_id: 1,
-        life1: 20
-      };
-      request
-        .post("/api/games")
-        .send(newGame)
-        .end((err, res) => {
-          expect(err).to.be.null;
-          expect(res).to.be.a("object");
-          expect(res.res.text).to.contain("PLAYER LIFE TRACKER");
-          done();
-        });
+      request.post("/arena/newGame").end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.be.a("object");
+        expect(res.res.text).to.contain("PLAYER LIFE TRACKER");
+        done();
+      });
     });
   });
 
   // Second user joins a game
   describe("Player 2 joins a new game", () => {
     it("should add a player to the game and send them in to the lobby", done => {
-      let player = { id: 1, player2_id: 2, life2: 20 };
+      let player = { id: 1, player2_id: 3 };
       request
-        .put("/api/games")
+        .post("/arena/join")
         .send(player)
         .end((err, res) => {
           expect(err).to.be.null;

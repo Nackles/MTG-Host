@@ -1,16 +1,4 @@
-USE mtg_ben;
-
-CREATE TABLE IF NOT EXISTS mtg_tokens (
-    `Token_name` VARCHAR(26) CHARACTER SET utf8,
-    `Number` VARCHAR(9) CHARACTER SET utf8,
-    `Color` VARCHAR(9) CHARACTER SET utf8,
-    `P_T` VARCHAR(5) CHARACTER SET utf8,
-    `Promo` VARCHAR(16) CHARACTER SET utf8,
-    `Type` VARCHAR(42) CHARACTER SET utf8,
-    `Artist` VARCHAR(22) CHARACTER SET utf8,
-    `Text` VARCHAR(213) CHARACTER SET utf8
-);
-INSERT INTO mtg_tokens VALUES
+INSERT INTO mtg_ben.tokens VALUES
     ('Pegasus','89','W','1|1','-','Creature - Pegasus','Mark Zug','Flying'),
     ('Soldier','90','W','1|1','-','Creature - Soldier','Daren Bader','-'),
     ('Zombie','91','B','2|2','-','Creature - Zombie','Christopher Rush','-'),

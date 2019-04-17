@@ -15,7 +15,7 @@ describe("POST 3 and UPDATE 1", function() {
 
   it("Add first 2 seeds", function() {
     request = chai.request(server);
-    db.players.destroy({ where: {} });
+    // db.players.destroy({ where: {} });
     db.players.create({ user_id: 1, name: "Bronson" });
     db.players.create({
       user_id: 2,
@@ -44,9 +44,10 @@ describe("POST 3 and UPDATE 1", function() {
   it("PUT: Add image link to BORIS", function() {
     // Create an object to send to the endpoint
     let player = {
+      id: 5,
       user_id: 3,
       name: "BORIS",
-      img_link: "http://placeimg.com/60/60/animals"
+      img_link: "http://placeimg.com/60/60/nature"
     };
     // Update the object in the server
     request

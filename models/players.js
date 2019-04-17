@@ -14,14 +14,15 @@ module.exports = function(sequelize, DataTypes) {
     // The html to insert will be something like: < a href='./index.html' > <img src='http://placeimg.com/150/150/any' alt='Mouseover'></a>
   });
 
-  // players.associate = function (models) {
-  //   // Associating Author with Posts
-  //   // When an Author is deleted, also delete any associated Posts
-  //   players.belongsTo(models.user, {
-  //     onDelete: 'no action'
-  //     onUpdate: 'cascade'
-  //   });
-  // };
+  players.associate = function(models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    players.belongsTo(models.users, {
+      forignKey: "user_id",
+      onDelete: "no action",
+      onUpdate: "cascade"
+    });
+  };
 
   return players;
 };
