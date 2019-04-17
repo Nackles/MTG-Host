@@ -12,19 +12,19 @@ module.exports = function(sequelize, DataTypes) {
   let games = sequelize.define("games", {
     player1_id: {
       type: DataTypes.INTEGER
-      // references: { model: players, key: "id" }
+      references: { model: players, key: "id" }
     },
     player2_id: {
       type: DataTypes.INTEGER
-      // references: { model: players, key: "id" }
+      references: { model: players, key: "id" }
     },
     player3_id: {
       type: DataTypes.INTEGER
-      // references: { model: players, key: "id" }
+      references: { model: players, key: "id" }
     },
     player4_id: {
       type: DataTypes.INTEGER
-      // references: { model: players, key: "id" }
+      references: { model: players, key: "id" }
     },
     life1: DataTypes.INTEGER,
     life2: DataTypes.INTEGER,
@@ -36,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
     accept_new: { type: DataTypes.BOOLEAN, defaultValue: true },
     winner_id: {
       type: DataTypes.INTEGER
-      // references: { model: player, key: "id" }
+      references: { model: player, key: "id" }
     }
   });
 
