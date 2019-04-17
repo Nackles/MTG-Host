@@ -4,16 +4,16 @@
 module.exports = function(sequelize, DataTypes) {
   let token_logs = sequelize.define("token_logs", {
     game_id: {
-      type: DataTypes.INTEGER,
-      references: { model: games, key: "id" }
+      type: DataTypes.INTEGER
+      // references: { model: games, key: "id" }
     },
     player_id: {
-      type: DataTypes.INTEGER,
-      references: { model: players, key: "id" }
+      type: DataTypes.INTEGER
+      // references: { model: players, key: "id" }
     },
     token_id: {
-      type: DataTypes.INTEGER,
-      references: { model: tokens, key: "id" }
+      type: DataTypes.INTEGER
+      // references: { model: tokens, key: "id" }
     },
     tapped: {
       type: DataTypes.BOOLEAN,

@@ -9,8 +9,8 @@ module.exports = function(app) {
       .findAll({
         include: [db.players]
       })
-      .then(function(dbplayers) {
-        res.json(dbplayers);
+      .then(function(dbPlayers) {
+        res.json(dbPlayers);
       });
   });
 
@@ -22,15 +22,15 @@ module.exports = function(app) {
           id: req.params.id
         }
       })
-      .then(function(dbplayers) {
-        res.json(dbplayers);
+      .then(function(dbPlayers) {
+        res.json(dbPlayers);
       });
   });
 
   // creating players and establishing initial parameters => however, as it stands now, we are creating the players record right after the username is created
   app.players("/api/players", function(req, res) {
-    db.players.create(req.body).then(function(dbplayers) {
-      res.json(dbplayers);
+    db.players.create(req.body).then(function(dbPlayers) {
+      res.json(dbPlayers);
     });
   });
 
@@ -42,8 +42,8 @@ module.exports = function(app) {
           id: req.body.id
         }
       })
-      .then(function(dbplayers) {
-        res.json(dbplayers);
+      .then(function(dbPlayers) {
+        res.json(dbPlayers);
       });
   });
 
@@ -55,8 +55,8 @@ module.exports = function(app) {
           id: req.params.id
         }
       })
-      .then(function(dbplayers) {
-        res.json(dbplayers);
+      .then(function(dbPlayers) {
+        res.json(dbPlayers);
       });
   });
 };
