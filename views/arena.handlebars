@@ -1,65 +1,62 @@
 <ul class="collapsible">
-        {{#each players}}
-        <li>
-                <div class="collapsible-header"><i class="material-icons">filter_drama</i><span
-                                id="{{this.id}}-player">{{this.name}}</span> | <span id="{{this.id}}-life"></span> |
-                        <span id="{{this.id}}-poison}}"></span></div>
-                <div class="collapsible-body"><span>ENTER INTO THE TOKEN TRAY!</span>
-                        <a id="{{this.id}}-life-down" class="link-color" href="#">Life -</a>
-                        <a id="{{this.id}}-life-up" class="link-color" href="#">Life +</a>
-                        <a id="{{this.id}}-tokens-spawn" class="link-color" href="#">Tokens +</a>
-                        <p>Placeholder text as a seperator.</p>
-                        <div class="divider purple"></div>
-                        <div id="{{this.id}}-tokens-active">
-                                <p>This where the tokens handlebars.<p>
-                                                {{this.tokens}}
+    {{#each players}}
+    <li>
+        <div class="collapsible-header"><i class="material-icons">filter_drama</i><span
+                id="{{this.id}}-player">{{this.name}}</span> | <span id="{{this.id}}-life"></span> |
+            <span id="{{this.id}}-poison}}"></span></div>
+        <div class="collapsible-body"><span>ENTER INTO THE TOKEN TRAY!</span>
+            <a id="{{this.id}}-life-down" class="link-color" href="#">Life -</a>
+            <a id="{{this.id}}-life-up" class="link-color" href="#">Life +</a>
+            <a id="{{this.id}}-tokens-spawn" class="link-color" href="#">Tokens +</a>
+            <p>Placeholder text as a seperator.</p>
+            <div class="divider purple"></div>
+            <div id="{{this.id}}-tokens-active">
+                <p>This where the tokens handlebars.<p>
+                        {{this.tokens}}
 
+            </div>
+
+        </div>
+    </li>
+    {{/each}}
+    <li>
+        <div class="collapsible-header"><i class="material-icons">place</i><span id="1-player">Player
+                2</span>---<span id="1-life">20</span>---<span id="1-poison">0</span></div>
+        <div class="collapsible-body">
+            <div id="life-collection">
+
+                <span id="1-tokens-spawn"><input type="submit" class="link-color" href="#" value="Life -"></span>
+                <span id="1-life-change" class="right"><input type="submit" class="link-color" href="#"
+                        value="Life +-"></span>
+                <form action="#">
+                    <p class="range-field">
+                        <input type="range" id="1-life" min="-20" max="20" />
+                    </p>
+                </form>
+
+            </div>
+            <span id="1-tokens-spawn"><a class="link-color" href="#tokens-modal">Token +</a></span>
+
+            <p>Placeholder text as a seperator.</p>
+            <div class="divider purple"></div>
+            <p>This where the tokens handlebars.<p>
+                    <div class="container" id="1-tokens-active">
+                        {{tokens}}
+                        <div class="carousel">
+                            {{#each tokens}}
+                            <a class="carousel-item {{this.name}}" href="#one!"><span
+                                    id="{{this.name}}-{{@index}}"></span><img src="{{this.img}}"></a>
+                            {{/each}}
+                            <div class="carousel-item"><img src="https://tokens.mtg.onl/tokens/IMA_004-Djinn-Monk.jpg">
+                            </div>
+                            <div class="carousel-item"><img src="https://tokens.mtg.onl/tokens/UST_004-Faerie-Spy.jpg">
+                            </div>
+                            <div class="carousel-item"><img src="https://tokens.mtg.onl/tokens/RIX_004-Golem.jpg">
+                            </div>
                         </div>
 
-                </div>
-        </li>
-        {{/each}}
-        <li>
-                <div class="collapsible-header"><i class="material-icons">place</i><span id="1-player">Player
-                                2</span>---<span id="1-life">20</span>---<span id="1-poison">0</span></div>
-                <div class="collapsible-body">
-                        <div id="life-collection">
 
-                                <span id="1-tokens-spawn"><input type="submit" class="link-color" href="#" value="Life -"></span>
-                                <span id="1-life-change" class="right"><input type="submit" class="link-color" href="#" value="Life +-"></span>
-                                <form action="#">
-                                        <p class="range-field">
-                                                <input type="range" id="1-life" min="-20" max="20" />
-                                        </p>
-                                </form>
-
-                        </div>
-                        <span id="1-tokens-spawn"><a class="link-color" href="#tokens-modal">Token +</a></span>
-
-                        <p>Placeholder text as a seperator.</p>
-                        <div class="divider purple"></div>
-                        <p>This where the tokens handlebars.<p>
-                                        <div class="container" id="1-tokens-active">
-                                                {{tokens}}
-                                                <div class="carousel">
-                                                        {{#each tokens}}
-                                                        <a class="carousel-item {{this.name}}" href="#one!"><span
-                                                                        id="{{this.name}}-{{@index}}"></span><img
-                                                                        src="{{this.img}}"></a>
-                                                        {{/each}}
-                                                        <div class="carousel-item"><img
-                                                                        src="https://tokens.mtg.onl/tokens/IMA_004-Djinn-Monk.jpg">
-                                                        </div>
-                                                        <div class="carousel-item"><img
-                                                                        src="https://tokens.mtg.onl/tokens/UST_004-Faerie-Spy.jpg">
-                                                        </div>
-                                                        <div class="carousel-item"><img
-                                                                        src="https://tokens.mtg.onl/tokens/RIX_004-Golem.jpg">
-                                                        </div>
-                                                </div>
-
-
-                                        </div>
-                </div>
-        </li>
+                    </div>
+        </div>
+    </li>
 </ul>

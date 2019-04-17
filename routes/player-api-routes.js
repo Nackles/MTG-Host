@@ -27,10 +27,10 @@ module.exports = function(app) {
       });
   });
 
-  // creating players and establishing initial parameters => however, as it stands now, we are creating the players record right after the username is created
+  // creating player and establishing initial parameters => however, as it stands now, we are creating the player record right after the username is created
   app.post("/api/players", function(req, res) {
-    db.players.create(req.body).then(function(dbPlayers) {
-      res.json(dbPlayers);
+    db.players.create(req.body).then(function(dbPlayer) {
+      res.json(dbPlayer);
     });
   });
 

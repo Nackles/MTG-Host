@@ -26,15 +26,34 @@ module.exports = function(app) {
           id: req.params.id
         }
       })
-      .then(function(dbGames) {
-        res.json(dbGames);
+      .then(async function(dbGame) {
+        let game = dbGame.dataValues;
+        let players = [];
+        if (game.player1_id) {
+          let player = await getPlayer(game.player1_id);
+          players.push(player[0].dataValues);
+        }
+        if (game.player2_id) {
+          let player = await getPlayer(game.player2_id);
+          players.push(player[0].dataValues);
+        }
+        if (game.player3_id) {
+          let player = await getPlayer(game.player3_id);
+          players.push(player[0].dataValues);
+        }
+        if (game.player4_id) {
+          let player = await getPlayer(game.player4_id);
+          players.push(player[0].dataValues);
+        }
+        res.render("arena", { game: game, players: players }); // TODO: Player needs icon, tokens, stats, poison. Breaks functionality at moment
       });
   });
 
   // creating games and establishing initial parameters.  Starting data is player1_id (and, if we elect to go this route, how many players)
   app.post("/api/games", function(req, res) {
-    db.games.create(req.body).then(function(dbGames) {
-      res.json(dbGames);
+    db.games.create(req.body).then(function(dbGame) {
+      res.redirect(`/api/games/${dbGame.dataValues.id}`);
+      // res.json(dbGame);
     });
   });
 
@@ -46,8 +65,8 @@ module.exports = function(app) {
           id: req.body.id
         }
       })
-      .then(function(dbGames) {
-        res.json(dbGames);
+      .then(function() {
+        res.redirect(`/api/games/${req.body.id}`);
       });
   });
 
@@ -64,3 +83,7 @@ module.exports = function(app) {
       });
   });
 };
+
+function getPlayer(uid) {
+  return db.players.findAll({ where: { id: uid } });
+}
