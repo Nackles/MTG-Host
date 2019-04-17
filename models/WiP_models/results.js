@@ -2,18 +2,33 @@
 // query need: 1 mandatory: Insert record.  There will be no updating unless we go in there for admin reasons fixing an error.  There will be at least 1 query that shows the  win/loss per player and ideally some kind of league standings function.  There is plenty of fun slice and dice we can do with this table.
 
 module.exports = function(sequelize, DataTypes) {
-  let Author = sequelize.define("Author", {
-    // Giving the Author model a name of type STRING
-    name: DataTypes.STRING
+  let token_logs = sequelize.define("token_logs", {
+    game_id: {
+      type: DataTypes.INTEGER
+      // references: { model: games, key: "id" }
+    },
+    player_id: {
+      type: DataTypes.INTEGER
+      // references: { model: players, key: "id" }
+    },
+    outcome: DataTypes.STRING(1),
+    life: DataTypes.INTEGER,
+    duration: DataTypes.TIME
   });
 
-  Author.associate = function(models) {
-    // Associating Author with Posts
-    // When an Author is deleted, also delete any associated Posts
-    Author.hasMany(models.Post, {
-      onDelete: "cascade"
-    });
-  };
-
-  return Author;
+  return token_logs;
 };
+
+// create table if not exists result
+// (
+//   id INT NOT NULL AUTO_INCREMENT,
+//   game_id int REFERENCES game(id),
+//   player_id int REFERENCES player(id),
+//   outcome char(1), -- could use a boolean but want to leave a "Draw" or "Dropped Game" state
+//   life int,
+//   duration time,
+//   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+//   PRIMARY KEY (id)
+//   --  We shouldn't need foreign keys here because we defined them in game_id and player_id in this table.  We'll see!
+// );

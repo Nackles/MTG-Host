@@ -7,10 +7,10 @@ module.exports = function(app) {
     // This would be an admin dashboard of all players in progress.  In real life this would be kept secure/secret
     db.players
       .findAll({
-        include: [db.player]
+        include: [db.players]
       })
-      .then(function(dbPlayer) {
-        res.json(dbPlayer);
+      .then(function(dbPlayers) {
+        res.json(dbPlayers);
       });
   });
 
@@ -22,8 +22,8 @@ module.exports = function(app) {
           id: req.params.id
         }
       })
-      .then(function(dbPlayer) {
-        res.json(dbPlayer);
+      .then(function(dbPlayers) {
+        res.json(dbPlayers);
       });
   });
 
@@ -34,7 +34,7 @@ module.exports = function(app) {
     });
   });
 
-  // PUT route for updating players -- If we edit player name we will want to update player login username (maybe?)
+  // PUT route for updating players -- If we edit players name we will want to update players login username (maybe?)
   app.put("/api/players", function(req, res) {
     db.players
       .update(req.body, {
@@ -42,12 +42,12 @@ module.exports = function(app) {
           id: req.body.id
         }
       })
-      .then(function(dbplayer) {
-        res.json(dbplayer);
+      .then(function(dbPlayers) {
+        res.json(dbPlayers);
       });
   });
 
-  // Not likely we would delete player ids, but here it in just in case
+  // Not likely we would delete players ids, but here it in just in case
   app.delete("/api/players/:id", function(req, res) {
     db.players
       .destroy({
@@ -55,8 +55,8 @@ module.exports = function(app) {
           id: req.params.id
         }
       })
-      .then(function(dbPlayer) {
-        res.json(dbPlayer);
+      .then(function(dbPlayers) {
+        res.json(dbPlayers);
       });
   });
 };

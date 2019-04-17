@@ -1,48 +1,62 @@
-<h1 class="center-align">MTG HOST</h1>
-
-<div class="red white-text valign-wrapper bezel">
-    <h4 class="center-align">PLAYER LIFE TRACKER</h4>
-</div>
-{{!-- anchor tags (playerx.id) MUST match player-tray IDs to function --}}
-{{!-- every time /arena/ recieves a GAME update, jQuery will check game.playerx_id for NULL and deactivate the tab if null --}}
-<div class="row">
-    <div class="col s12">
-        <ul class="tabs">
-            <li class="tab col s3">
-                <a href="#{{game.player1_id}}">
-                    <i class="tiny material-icons">layers</i>{{game.player1_id.name}} Life: {{game.life1}}</a>
-            </li>
-            <li class="tab col s3">
-                <a href="#{{game.player2_id}}">
-                    <i class="tiny material-icons">send</i> {{game.player2_id.name}} Life: {{game.life2}}</a>
-            </li>
-            <li class="tab col s3">
-                <a href="#{{game.player3_id}}">
-                    <i class="tiny material-icons">loyalty</i> {{game.player3_id.name}} Life: {{game.life3}}</a>
-            </li>
-            <li class="tab col s3">
-                <a href="#{{game.player4_id}}">
-                    <i class="tiny material-icons">map</i> {{game.player4_id.name}} Life: {{game.life4}}</a>
-            </li>
-        </ul>
-    </div>
-    <!-- player info trays -->
-    <!-- RULE: P1 tab is never disabled - P2/3/4 starts disabled and enable as players connect -->
+<ul class="collapsible">
     {{#each players}}
-    <div id="{{id}}" class="col s12 player-tray">
-        <!-- once complete, handlebars the below per player -->
-        <!-- player 1 -->
-        <div id="{{id}}-info">
-            <div class="valign-wrapper"><i class="small material-icons">{{icon}}</i>
-                <p>{{name}}</p>
+    <li>
+        <div class="collapsible-header"><i class="material-icons">filter_drama</i><span
+                id="{{this.id}}-player">{{this.name}}</span> | <span id="{{this.id}}-life"></span> |
+            <span id="{{this.id}}-poison}}"></span></div>
+        <div class="collapsible-body"><span>ENTER INTO THE TOKEN TRAY!</span>
+            <a id="{{this.id}}-life-down" class="link-color" href="#">Life -</a>
+            <a id="{{this.id}}-life-up" class="link-color" href="#">Life +</a>
+            <a id="{{this.id}}-tokens-spawn" class="link-color" href="#">Tokens +</a>
+            <p>Placeholder text as a seperator.</p>
+            <div class="divider purple"></div>
+            <div id="{{this.id}}-tokens-active">
+                <p>This where the tokens handlebars.<p>
+                        {{this.tokens}}
+
             </div>
+
         </div>
-        <div id="p{{id}}-stats">jQuery updates all stats (W/L) inline, ONCE on-login{{{stats}}</div>
-        <span id="p{{id}}-life">Life: {{life}}</span><span id="spacer-span"> </span><span id="p{{{id}}-poison">Poison:
-            {{poison}}</span>
-        <div class="divider"></div>
-        <div id="p{{id}}-tokens">TOKENS HANDLEBARS IS HERE {{tokens}}
-        </div>
-    </div>
+    </li>
     {{/each}}
-</div>
+    <li>
+        <div class="collapsible-header"><i class="material-icons">place</i><span id="1-player">Player
+                2</span>---<span id="1-life">20</span>---<span id="1-poison">0</span></div>
+        <div class="collapsible-body">
+            <div id="life-collection">
+
+                <span id="1-tokens-spawn"><input type="submit" class="link-color" href="#" value="Life -"></span>
+                <span id="1-life-change" class="right"><input type="submit" class="link-color" href="#"
+                        value="Life +-"></span>
+                <form action="#">
+                    <p class="range-field">
+                        <input type="range" id="1-life" min="-20" max="20" />
+                    </p>
+                </form>
+
+            </div>
+            <span id="1-tokens-spawn"><a class="link-color" href="#tokens-modal">Token +</a></span>
+
+            <p>Placeholder text as a seperator.</p>
+            <div class="divider purple"></div>
+            <p>This where the tokens handlebars.<p>
+                    <div class="container" id="1-tokens-active">
+                        {{tokens}}
+                        <div class="carousel">
+                            {{#each tokens}}
+                            <a class="carousel-item {{this.name}}" href="#one!"><span
+                                    id="{{this.name}}-{{@index}}"></span><img src="{{this.img}}"></a>
+                            {{/each}}
+                            <div class="carousel-item"><img src="https://tokens.mtg.onl/tokens/IMA_004-Djinn-Monk.jpg">
+                            </div>
+                            <div class="carousel-item"><img src="https://tokens.mtg.onl/tokens/UST_004-Faerie-Spy.jpg">
+                            </div>
+                            <div class="carousel-item"><img src="https://tokens.mtg.onl/tokens/RIX_004-Golem.jpg">
+                            </div>
+                        </div>
+
+
+                    </div>
+        </div>
+    </li>
+</ul>
