@@ -12,6 +12,7 @@ from token_logs tl
 left join games g on tl.game_id = g.id
 left join players p on tl.player_id = p.id
 left join tokens t on tl.token_id = t.id
+where g.id = 1 and p.id = 4
 ;
 -- QUERY TO RETURN WINNERS AND LOSERS OF EACH MATCH IN DASHBOARD FORMAT (need to add a parameter for dropped game match to track the rage quitters!).  This could be used for admins who need a 
 -- dashboard of all games in process to monitor network stats.  Also could be used for regular data collection
