@@ -2,7 +2,7 @@
 
 // Not likely to use sequelize as shown in this boilerplate.  I think folks use a "chron" job to update tables like this nightly using..... python?  For our part we'll just push it in manually
 module.exports = function(sequelize, DataTypes) {
-  let token_logs = sequelize.define("token_logs", {
+  let tokens = sequelize.define("tokens", {
     name: DataTypes.STRING,
     color: DataTypes.STRING,
     type: DataTypes.STRING,
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  return token_logs;
+  return tokens;
 };
 
 // create table if not exists token
