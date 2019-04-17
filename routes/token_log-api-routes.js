@@ -12,6 +12,19 @@ module.exports = function(app) {
       });
   });
 
+  // Get all tokens played in a selected game
+  app.get("/api/token_logs/:game", function(req, res) {
+    db.token_logs
+      .findAll({
+        where: {
+          game_id: req.params.game
+        }
+      })
+      .then(function(dbTokenLogs) {
+        res.json(dbTokenLogs);
+      });
+  });
+
   // This will get real time update info for all clients (tokens played/tapped by game, by player).  Hypothetically we could pull all for  given game, and then filter the results by player on the client side
   app.get("/api/token_logs/:id:game", function(req, res) {
     db.token_logs
