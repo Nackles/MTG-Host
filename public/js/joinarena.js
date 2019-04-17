@@ -15,8 +15,6 @@ $(document).ready(function() {
 
   // host-create button routes to api/arena and creates a new game
   $("#host-create").on("click", function() {
-    //get request to randomly generate an ID
-    let gameId = Math.floor(Math.random() * 10000000000);
-    window.location = `/arena/${gameId}`;
+    window.location = "/arena/newGame";
   });
 });
