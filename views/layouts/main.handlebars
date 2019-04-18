@@ -39,25 +39,10 @@
         }
       })
 
-      // When the Token + button is clicked, change the ID in the modal to the modal of the player selected, then open the modal
-      $(".tokens-select").on("click", function () {
-        $("#tokens-spawn").attr("id") = $(this).attr("id")
-        $("#tokens-modal").modal('open');
+
       })
 
-      // Tokens array will be populated on startup by database pull
-      let tokensArr = [];
-      $("#tokens-search").on("click", function(){
-        // Token search term
-          let searchFor = $("#search-for").val();
-        // Filtering each object for the searchFor search term
-        let filteredTokens = tokensArr.filter(function (token) {
-          return token.name.includes(searchFor)
-        });
-        
-      })
-
-    });
+    
   </script>
 </body>
 
