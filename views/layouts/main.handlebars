@@ -21,8 +21,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="/js/index.js"></script>
   <script src="/js/joinarena.js"></script>
-
 
   {{!-- Click handlers and initializations --}}
   <script>
@@ -39,10 +39,34 @@
         }
       })
 
-
+      // When the Token + button is clicked, change the ID in the modal to the modal of the player selected, then open the modal
+      $(".tokens-select").on("click", function () {
+        $("#tokens-spawn").attr("id") = $(this).attr("id")
+        $("#tokens-modal").modal('open');
       })
 
-    
+      // Tokens array will be populated on startup by database pull
+      let tokensArr = [];
+      $("#tokens-search").on("click", function(){
+        // Token search term
+          let searchFor = $("#search-for").val();
+        // Filtering each object for the searchFor search term        
+        let filteredTokens = $.grep(tokensArr, (function (t){
+          return t.name.includes("searchFor")
+        })
+
+        // Display each token in a list that adds a class allowing them to be selected and added to a player's tray
+        $.each(filteredTokens, function(){
+          $("#searched-tokens").append("<p>"+this.name+"</p><br><img class="'selectable'" src="+this.img+"/>");
+        })
+
+        // Attach a click handler to that class
+        $(".selectable").on("click", function(){
+          // I think this is where we use a post request to tell the server this player is adding a token to their tray, and the page will auto-populate once the new gamestate object comes back.
+        })
+      )})
+
+    });
   </script>
 </body>
 
