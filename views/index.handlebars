@@ -1,49 +1,83 @@
+<div class="row">
+  <div class="col s12">
+    {{!-- Password verification ids: (password, password-confirm --}}
+    <ul class="collapsible popout">
+      <li class="active">
+        <div class="collapsible-header">Login</div>
+        <div class="collapsible-body">
+          {{#if error}} <h4>Incorrect username or password!</h4> {{/if}}
+          <form action="/api/login" class="text-center" method="post">
+            <div>
+              <label>Username:</label>
+              <input type="text" name="username" />
+            </div>
+            <div>
+              <label>Password:</label>
+              <input type="password" name="password" />
+            </div>
+            <div>
+              <input class="btn" type="submit" value="Log In" />
+            </div>
+          </form>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Create Login</div>
+        <div class="collapsible-body">
+          <form action="/api/signup" class="text-center validatedForm" method="post">
+            <div>
+              <label>Username:</label>
+              <input type="text" name="username" placeholder="Username" />
+            </div>
+            <div>
+              <label>Password:</label>
+              <input type="password" name="password" id="password" placeholder="Password" />
+            </div>
+            <div>
+              <label>Verify Password:</label>
+              <input type="password" id="password-confirm" name="password-verify" placeholder="Confirm Password" />
+            </div>
+            <div>
+              <input class="btn" type="submit" value="Sign Up" />
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
-  <div class="row">
-    <div class="col s12">
-      {{!-- Password verification ids: (password, password-confirm --}}
-      <ul class="collapsible popout">
-        <li class="active">
-          <div class="collapsible-header">Login</div>
-          <div class="collapsible-body">
-            {{#if error}} <h4>Incorrect username or password!</h4> {{/if}}
-            <form action="/api/login" class="text-center" method="post">
-              <div>
-                <label>Username:</label>
-                <input type="text" name="username" />
-              </div>
-              <div>
-                <label>Password:</label>
-                <input type="password" name="password" />
-              </div>
-              <div>
-                <input class="btn" type="submit" value="Log In" />
-              </div>
-            </form>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">Create Login</div>
-          <div class="collapsible-body">
-            <form action="/api/signup" class="text-center validatedForm" method="post">
-              <div>
-                <label>Username:</label>
-                <input type="text" name="username" placeholder="Username" />
-              </div>
-              <div>
-                <label>Password:</label>
-                <input type="password" name="password" id="password" placeholder="Password" />
-              </div>
-              <div>
-                <label>Verify Password:</label>
-                <input type="password" id="password-confirm" name="password-verify" placeholder="Confirm Password" />
-              </div>
-              <div>
-                <input class="btn" type="submit" value="Sign Up" />
-              </div>
-            </form>
-          </div>
-        </li>
-      </ul>
+{{!-- change id back to {{id}} for deploy --}}
+<a id="1" class="btn modal-trigger" href="#tokens-modal">Tokens +</a>
+
+<!-- Tokens -->
+<div id="tokens-modal" class="modal">
+  <div class="modal-content">
+    <div class="dropdown">
+      <!-- click handler needed for text submit, then display results that add the token on img click -->
+      <div class="input-field">
+        <input placeholder="Token search" id="search-for" type="text" class="validate">
+        <a class="btn" id="tokens-search">Search</a>
+      </div>
+
     </div>
   </div>
+  <h4 class="center-align">...and select from results below!</h4>
+  <div id="searched-tokens">
+    <form id="selected-token" action="#">
+    {{#each dbTokens}}
+    <p>
+      <label>
+      <input name="group1" class="with-gap" value="{{id}}" type="radio" />
+      <span>{{name}} - {{color}} - {{pt}} - {{text}}</span>      
+      </label>
+      </p>
+    {{/each}}
+    </form>
+    </div>
+  <div class="modal-footer">
+    <button id="token-spawner" data-name="" class="modal-close waves-effect waves-green btn">Add Selected</button>
+  </div>
+</div>
+</div>
+

@@ -27,6 +27,7 @@
   {{!-- Click handlers and initializations --}}
   <script>
     $(document).ready(function () {
+      //Initialize Materialize elements
       $('.collapsible').collapsible();
       $('.modal').modal();
 
@@ -39,12 +40,49 @@
         }
       })
 
-      // When the Token + button is clicked, change the ID in the modal to the modal of the player selected, then open the modal
-      $(".tokens-select").on("click", function () {
-        $("#tokens-spawn").attr("id") = $(this).attr("id")
-        $("#tokens-modal").modal('open');
+      // When you click a player's Add Token button, the modal opens and the Add Token modal's submit button recieves a data-name attribute = that player's ID.
+      $(".modal-trigger").on("click", function () {
+        $("#token-spawner").attr("data-name", this.id)
+        console.log("token spawner player id = " + this.id)
       })
+
+      // When the token-search button is clicked, ask the server about tokens and handlebars options into a selectable radio menu.
+      $("#tokens-search").on("click", function () {
+        // Token search term
+        let searchFor = $("#search-for").val().trim();
+
+
+        // Contacting the server RE: token names and getting the JSON to handlebars.
+        app.get("/api/tokens/:name", function (searchFor, res) {
+          // This will get real time update info for all clients
+          db.tokens
+            .findAll({
+              where: {
+                name: searchFor
+              }
+            })
+            .then(function (dbTokens) {
+              res.json(dbTokens);
+            });
+        });
+
+        //Now we have a selectable list of tokens.
+        //When the add-token button is clicked, get the ID of the radio button selected and assign that token to the player id present in this button's player-name.
+        $("#token-spawner").on("click", function(){
+          // Get the id of the player to add the token to
+          let addToPlayer = $(this.data-name)
+          // Get the id of the token by the checked radio token's value, which is set on-handlebars of the list.
+          let addToken = $('input[name=group1]:checked', '#selected-token').val()
+
+          // Make a post request to the server informing it that player addToPlayer now owns addToken.
+        
+
+
+        })
+
       })
+
+    })
   </script>
 </body>
 

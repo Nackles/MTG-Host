@@ -13,7 +13,7 @@
                         <input type="range" id="{{id}}-life-range" min="-20" max="20" />
                     </p>
                 </form>
-                <a id="{{id}}-t-spawn" class="btn modal-trigger" href="#tokens-modal">Tokens +</a>
+                <a id="{{id}}" class="btn modal-trigger" href="#tokens-modal">Tokens +</a>
             </div>
 
             <p>Set the slider to life gained or lost, and press 'Life Change' to gain or lose that much
@@ -43,9 +43,16 @@
             <button onclick="myFunction()" class="dropbtn">Dropdown</button>
             <div id="myDropdown" class="dropdown-content">
                 <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                {{#each token}}
-                <a href="#spawn-token-{{id}}">{{this}}</a>
-                {{/each}}
+                <table>
+                    <tbody>
+                        {{#if dbTokens}}
+                        {{#each dbTokens}}
+                        <tr>
+                        <a href="#token-{{id}}" data-player-spawn="">{{name}} - {{color}} - {{pt}} - {{text}}</a>
+                        </tr>
+                        {{/each}}
+                        {{/if}}
+                </table>
             </div>
         </div>
         {{!-- <div class="input-field">
@@ -56,7 +63,7 @@
         <div id="searched-tokens"></div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Add Token</a>
+        <a href="#!" id="add-token" class="modal-close waves-effect waves-green btn-flat">Add Token</a>
     </div>
 </div>
 
@@ -70,31 +77,4 @@
             window.location = `/arena/${game}`
         }
     });
-</script>
-
-{{!-- Tokens selector script  TODO:--}}
-<script>
-    // Tokens array will be populated on startup by database pull
-    let tokensArr = [];
-    $("#tokens-search").on("click", function () {
-        // Token search term
-        let searchFor = $("#search-for").val();
-        // Filtering each object for the searchFor search term
-        let filteredTokens = $.grep(tokensArr, (function (t) {
-            return t.name.includes("searchFor")
-        }))
-    })
-
-    // Display each token in a list that adds a class allowing them to be selected and added to a player's tray
-    $.each(filteredTokens, function () {
-        if (err) throw err
-        $("#searched-tokens").append("<p>" + this.name + "</p><br><img class="'selectable'" src=" + this.img + " />");
-    })
-
-    // Attach a click handler to that class
-    $(".selectable").on("click", function () {
-        console.log("hey im not broken")
-
-        // I think this is where we use a post request to tell the server this player is adding a token to their tray, and the page will auto-populate once the new gamestate object comes back.
-    })
 </script>
