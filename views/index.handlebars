@@ -7,7 +7,8 @@
           <div class="collapsible-header">Login</div>
           <div class="collapsible-body">
             {{#if error}} <h4>Incorrect username or password!</h4> {{/if}}
-            <form action="/api/login" class="text-center" method="post">
+            <form action="/api/login" class="text-center" method="post"
+              onsubmit="return (typeof submitted == 'undefined') ? (submitted = true) : !submitted">
               <div>
                 <label>Username:</label>
                 <input type="text" name="username" />
@@ -25,7 +26,8 @@
         <li>
           <div class="collapsible-header">Create Login</div>
           <div class="collapsible-body">
-            <form action="/api/signup" class="text-center validatedForm" method="post">
+            <form action="/api/signup" class="text-center validatedForm" method="post"
+              onsubmit="return (typeof submitted == 'undefined') ? (submitted = true) : !submitted">
               <div>
                 <label>Username:</label>
                 <input type="text" name="username" placeholder="Username" />
