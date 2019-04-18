@@ -36,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
     accept_new: { type: DataTypes.BOOLEAN, defaultValue: true },
     winner_id: {
       type: DataTypes.INTEGER,
-      references: { model: "player", key: "id" }
+      references: { model: "players", key: "id" }
     }
   });
 
