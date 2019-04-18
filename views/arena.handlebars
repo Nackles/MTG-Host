@@ -53,9 +53,14 @@
     </div>
 </div>
 
+{{!-- Creates a socket listener for current game lobby --}}
+<span id="game-id" data-id={{game}}></span>
 <script src="/socket.io/socket.io.js"></script>
-<script> let socket = io();
+<script>
+    let socket = io();
     socket.on("update", function (game) {
-        window.location = `/arena/${game}`
+        if (game === $("#game-id").attr("data-id")) {
+            window.location = `/arena/${game}`
+        }
     });
 </script>
