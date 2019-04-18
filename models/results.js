@@ -2,12 +2,12 @@
 // query need: 1 mandatory: Insert record.  There will be no updating unless we go in there for admin reasons fixing an error.  There will be at least 1 query that shows the  win/loss per player and ideally some kind of league standings function.  There is plenty of fun slice and dice we can do with this table.
 
 module.exports = function(sequelize, DataTypes) {
-  let token_logs = sequelize.define("token_logs", {
-    game_id: {
+  let results = sequelize.define("results", {
+    gamesid: {
       type: DataTypes.INTEGER
       // references: { model: games, key: "id" }
     },
-    player_id: {
+    playersid: {
       type: DataTypes.INTEGER
       // references: { model: players, key: "id" }
     },
@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     duration: DataTypes.TIME
   });
 
-  return token_logs;
+  return results;
 };
 
 // create table if not exists result
