@@ -26,6 +26,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// socket setup
+let http = require("http").createServer(app);
+let io = require("socket.io")(http);
+// require("./socket.js")(io);
+app.io = io;
+
 // Requiring our routes
 require("./routes/auth-api-routes.js")(app);
 require("./routes/player-api-routes.js")(app);
@@ -36,7 +42,7 @@ require("./routes/htmlRoutes.js")(app);
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
+  http.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,
