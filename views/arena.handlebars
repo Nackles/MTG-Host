@@ -52,3 +52,15 @@
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Add Token</a>
     </div>
 </div>
+
+{{!-- Creates a socket listener for current game lobby --}}
+<span id="game-id" data-id={{game}}></span>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    let socket = io();
+    socket.on("update", function (game) {
+        if (game === $("#game-id").attr("data-id")) {
+            window.location = `/arena/${game}`
+        }
+    });
+</script>
