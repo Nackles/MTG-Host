@@ -8,7 +8,7 @@ create table if not exists users
 (
   id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(35) NOT NULL,
-  password varchar(20) NOT NULL,
+  password varchar(100) NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (id)
