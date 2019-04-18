@@ -52,3 +52,10 @@
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Add Token</a>
     </div>
 </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script> let socket = io();
+    socket.on("update", function (game) {
+        window.location = `/arena/${game}`
+    });
+</script>
