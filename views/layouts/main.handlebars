@@ -51,34 +51,27 @@
         // Token search term
         let searchFor = $("#search-for").val().trim();
 
+        $.get("/api/tokens/" + searchFor, function (data) {
+          res.render('arena', data)
+        })
+      })
 
-        // Contacting the server RE: token names and getting the JSON to handlebars.
-        app.get("/api/tokens/:name", function (searchFor, res) {
-          // This will get real time update info for all clients
-          db.tokens
-            .findAll({
-              where: {
-                name: searchFor
-              }
-            })
-            .then(function (dbTokens) {
-              res.json(dbTokens);
-            });
-        });
+      //Now we have a selectable list of tokens.
+      //When the add-token button is clicked, get the ID of the radio button selected and assign that token to the player id present in this button's player-name.
+      $(document).on("click", "#token-spawner", function () {
 
-        //Now we have a selectable list of tokens.
-        //When the add-token button is clicked, get the ID of the radio button selected and assign that token to the player id present in this button's player-name.
-        $("#token-spawner").on("click", function(){
-          // Get the id of the player to add the token to
-          let addToPlayer = $(this.data-name)
-          // Get the id of the token by the checked radio token's value, which is set on-handlebars of the list.
-          let addToken = $('input[name=group1]:checked', '#selected-token').val()
+        // Get the id of the player to add the token to
+        let addToPlayer = $(this.data-name)
+        // Get the id of the token by the checked radio token's value, which is set on-handlebars of the list.
+        let addToken = $('input[name=group1]:checked', '#selected-token').val()
 
-          // Make a post request to the server informing it that player addToPlayer now owns addToken.
-        
+        // Make a post request to the server informing it that player addToPlayer now owns addToken.
+        app.post("/api/token_logs", function (req, res) {
 
 
         })
+
+
 
       })
 

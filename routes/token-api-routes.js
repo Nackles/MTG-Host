@@ -48,4 +48,18 @@ module.exports = function(app) {
         res.json(dbTokens);
       });
   });
+
+  // Contacting the server RE: token names and getting the JSON to handlebars.
+  app.get("/api/tokens/:name", function(req, res) {
+    // This will get real time update info for all clients
+    db.tokens
+      .findAll({
+        where: {
+          name: req.params.name
+        }
+      })
+      .then(function(dbTokens) {
+        res.json(dbTokens);
+      });
+  });
 };

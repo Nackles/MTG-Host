@@ -83,7 +83,7 @@ module.exports = function(app) {
             { where: { id: req.body.id } }
           )
           .then(() => {
-            // TODO: Add below to all cases where live update is needed
+            // TODO: Add below to all cases where live update is needed (and maybe disconnect listener)
             app.io.sockets.emit("update", req.body.id); // Causes all instances of this game to reload
             res.redirect(`/arena/${gameId}`);
           });
