@@ -1,7 +1,6 @@
 // Requiring our custom middleware for checking if a user is logged in
 let isAuthenticated = require("../config/middleware/isAuthenticated");
 let db = require("../models");
-let log = require("con-logger");
 
 module.exports = function(app) {
   app.get("/", function(req, res) {
@@ -52,10 +51,9 @@ module.exports = function(app) {
       }
     }
 
-    log(players[0].tokens);
-
     res.render("arena", {
-      players: players
+      players: players,
+      game: req.params.gameId
     }); // TODO: Object needs to contain {players:[{id:, name:, life:, tokens:{},}]}
   });
 
@@ -85,6 +83,8 @@ module.exports = function(app) {
             { where: { id: req.body.id } }
           )
           .then(() => {
+            // TODO: Add below to all cases where live update is needed
+            app.io.sockets.emit("update", req.body.id); // Causes all instances of this game to reload
             res.redirect(`/arena/${gameId}`);
           });
       });
