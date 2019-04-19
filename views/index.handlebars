@@ -5,7 +5,7 @@
       <ul class="collapsible popout">
         <li class="active">
           <div class="collapsible-header">Login</div>
-          <div class="collapsible-body">
+          <div class="collapsible-body indigo lighten-5">
             {{#if error}} <h4>Incorrect username or password!</h4> {{/if}}
             <form action="/api/login" class="text-center" method="post"
               onsubmit="return (typeof submitted == 'undefined') ? (submitted = true) : !submitted">
