@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
     token_logs.belongsTo(models.players, {
-      forignKey: "token_id",
+      forignKey: "player_id",
       onDelete: "no action",
       onUpdate: "no action"
     });
