@@ -47,20 +47,27 @@ module.exports = function(app) {
     });
 
     // Add appropriate tokens to each player
-    // let keys =
-    // for(let i = 0; i<tokens.length; i++){
-    //   let token =
-    // }
-    for (let logs in tokens) {
-      let token = tokens[logs].dataValues;
-      for (let player in players) {
-        if (players[player].player_id === token.player_id) {
+    for (let i = 0; i < tokens.length; i++) {
+      let token = tokens[i];
+      for (let j = 0; j < players.length; j++) {
+        if (players[j].player_id === token.player_id) {
+          players[j].tokens.push(token);
           console.log(token);
-          players[player].tokens.push(token.dataValues);
-          console.log(players[player].tokens);
+          console.log(players[j].tokens);
         }
       }
     }
+
+    // for (let logs in tokens) {
+    //   let token = tokens[logs].dataValues;
+    //   for (let player in players) {
+    //     if (players[player].player_id === token.player_id) {
+    //       console.log(token);
+    //       players[player].tokens.push(token.dataValues);
+    //       console.log(players[player].tokens);
+    //     }
+    //   }
+    // }
 
     console.log("LOOK AT ME INSTEAD", {
       players: players,
