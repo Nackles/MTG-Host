@@ -3,16 +3,16 @@
     <li>
         <div class="collapsible-header"><i class="material-icons">place</i><span
                 id="{{player_id}}-player">{{name}}</span> |
-            <span id="{{player_id}}-life">{{life}}</span></div>
+            <span id="{{player_game_id}}-life">{{life}}</span></div>
 
         <div class="collapsible-body"><span>ENTER INTO THE TOKEN TRAY!</span>
             <div class="life-collection">
-                <button data-player="{{player_id}}" class="right btn link-color life-change">Change
+                <button data-player="{{player_game_id}}" class="right btn link-color life-change">Change
                     Life</button>
                 <div class="row"></div>
                 <form>
                     <p class="range-field">
-                        <input type="range" id="{{player_id}}-life-range" min="-20" max="20" />
+                        <input type="range" id="{{player_game_id}}-life-range" min="-20" max="20" />
                     </p>
                 </form>
                 <a id="{{player_id}}" class="btn modal-trigger" href="#{{player_id}}-tokens-modal">Tokens +</a>

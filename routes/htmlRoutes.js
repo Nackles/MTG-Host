@@ -24,7 +24,12 @@ module.exports = function(app) {
       if (game[`player${i}_id`]) {
         player = game[`player${i}_id`];
         life = game[`life${i}`];
-        players.push({ ["player_id"]: player, ["life"]: life, tokens: [] });
+        players.push({
+          player_game_id: i,
+          player_id: player,
+          ["life"]: life,
+          tokens: []
+        });
       }
     }
     // Add name to  each player
