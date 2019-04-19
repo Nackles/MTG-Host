@@ -60,12 +60,12 @@
 
       //Now we have a selectable list of tokens.
       //When the add-token button is clicked, get the ID of the radio button selected and assign that token to the player id present in this button's player-name.
-      $(document).on("click", "#token-spawner", function () {
+      //$(document).on("click", "#token-spawner", function () {
 
         // Get the id of the player to add the token to
-        let addToPlayer = $(this.data - name)
+        //let addToPlayer = $(this.data - name)
         // Get the id of the token by the checked radio token's value, which is set on-handlebars of the list.
-        let addToken = $('input[name=group1]:checked', '#selected-token').val()
+        //let addToken = $('input[name=group1]:checked', '#selected-token').val()
 
         // Make a post request to the server informing it that player addToPlayer now owns addToken.
         //app.post("/api/token_logs", function (req, res) {
@@ -75,7 +75,7 @@
 
 
 
-      })
+      //})
 
     })
   </script>
