@@ -51,7 +51,8 @@ module.exports = function(app) {
       token = tokens[logs].dataValues;
       for (let player in players) {
         if (players[player].player_id === token.player_id) {
-          players[player].tokens.push(token.token.dataValues);
+          console.log(token);
+          players[player].tokens.push(token.dataValues);
         }
       }
     }
