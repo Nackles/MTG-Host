@@ -53,6 +53,7 @@ module.exports = function(app) {
         if (players[player].player_id === token.player_id) {
           console.log(token);
           players[player].tokens.push(token.dataValues);
+          console.log(players[player].tokens);
         }
       }
     }
