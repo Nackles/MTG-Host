@@ -2,7 +2,8 @@
     <div class="col s12">
         <div class="card">
             <div class="card-content">
-                <form action="/arena/join" method="post">
+                <form action="/arena/join" method="post"
+                    onsubmit="return (typeof submitted == 'undefined') ? (submitted = true) : !submitted">
                     {{!-- //Get request as a button that will create a gameID --}}
                     {{!-- <a class="btn" id="host-create">Host a Game!</a> --}}
                     <div>
@@ -14,7 +15,8 @@
                 {{!-- //Search for the GameID of the host --}}
                 {{!-- <a class="btn" id="host-join">Join your Host</a><br><br> --}}
                 <div class="row"></div>
-                <form action="/arena/newGame" method="post">
+                <form action="/arena/newGame" method="post"
+                    onsubmit="return (typeof submitted == 'undefined') ? (submitted = true) : !submitted">
                     {{!-- //Get request as a button that will create a gameID --}}
                     {{!-- <a class="btn" id="host-create">Host a Game!</a> --}}
                     <button class="btn" type="submit">Host a Game!</button>
