@@ -93,6 +93,7 @@
 
     $("#tokens-search").on("click", () => {
         let player = $(this).attr("data-player")
+        console.log("LOOK AT MY PLAYER", player)
         let tokenName = $(`#${player}-search-for`).val();
         $.get(`/api/tokens/${tokenName}`, function (tokens) {
             let unique = []
