@@ -109,18 +109,18 @@
                     unique.push(token)
                 }
             })
-            let form = $("<form>").attr("id", "selected-token")
+            let select = $("<select>").attr("id", "selected-token")
             console.log(unique)
             unique.forEach(token => {
-                let p = $("<p>")
-                let label = $("<label>")
-                let input = $("<input>").attr("name", token.name).addClass("with-gap").attr("value", token.id).attr("type", "radio")
-                let span = $("<span>").text(`${token.name} - ${token.color} - ${token.type} - ${token.pt} - ${token.text}`)
-                label.append(input, span)
-                p.append(label)
-                form.append(p)
+                // let p = $("<p>")
+                // let label = $("<label>")
+                //let input = $("<input>").attr("name", token.name).addClass("with-gap").attr("value", token.id).attr("type", "radio")
+                let option = $("<option>").text(`${token.name} - ${token.color} - ${token.type} - ${token.pt} - ${token.text}`).attr("value", token.id)
+                // label.append(input, span)
+                // p.append(label)
+                select.append(option)
             })
-            $("#selected-token").append(form)
+            $("#selected-token").append(select)
         });
     })
 
