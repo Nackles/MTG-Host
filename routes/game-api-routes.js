@@ -45,6 +45,7 @@ module.exports = function(app) {
           let player = await getPlayer(game.player4_id);
           players.push(player[0].dataValues);
         }
+        console.log("LOOK AT ME", { game: game, players: players });
         res.render("arena", { game: game, players: players }); // TODO: Player needs icon, tokens, stats, poison. Breaks functionality at moment
       });
   });

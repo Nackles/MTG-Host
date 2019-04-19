@@ -1,19 +1,19 @@
 <ul class="collapsible">
     {{#each players}}
     <li>
-        <div class="collapsible-header"><i class="material-icons">place</i><span id="{{id}}-player">{{name}}</span> |
-            <span id="{{id}}-life"></span>{{life}}</span></div>
+        <div class="collapsible-header"><i class="material-icons">place</i><span id="{{player_id}}-player">{{name}}</span> |
+            <span id="{{player_id}}-life"></span>{{life}}</span></div>
 
         <div class="collapsible-body"><span>ENTER INTO THE TOKEN TRAY!</span>
             <div class="life-collection">
-                <span id="{{id}}-life-change" class="right"><input type="submit" class="link-color" href="#"
+                <span id="{{player_id}}-life-change" class="right"><input type="submit" class="link-color" href="#"
                         value="Change Life"></span>
                 <form action="#">
                     <p class="range-field">
-                        <input type="range" id="{{id}}-life-range" min="-20" max="20" />
+                        <input type="range" id="{{player_id}}-life-range" min="-20" max="20" />
                     </p>
                 </form>
-                <a id="{{id}}" class="btn modal-trigger" href="#tokens-modal">Tokens +</a>
+                <a id="{{player_id}}" class="btn modal-trigger" href="#tokens-modal">Tokens +</a>
             </div>
 
             <p>Set the slider to life gained or lost, and press 'Life Change' to gain or lose that much
@@ -21,9 +21,9 @@
             <div class="divider purple"></div>
             <h5 class="center-align">Token Tray</h5>
 
-            <div id="{{id}}-tokens-active" class="container">
+            <div id="{{player_id}}-tokens-active" class="container">
                 <div class="carousel">
-                    {{#each tokens}}
+                    {{#each data}}
                     <div class="carousel-item {{name}}"><span id="{{name}}-{{@index}}">{{name}}</span><img
                             src="{{img}}">
                     </div>
@@ -40,31 +40,32 @@
 <div id="tokens-modal" class="modal">
     <div class="modal-content">
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-            <div id="myDropdown" class="dropdown-content">
-                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                <table>
-                    <tbody>
-                        {{#if dbTokens}}
-                        {{#each dbTokens}}
-                        <tr>
-                        <a href="#token-{{id}}" data-player-spawn="">{{name}} - {{color}} - {{pt}} - {{text}}</a>
-                        </tr>
-                        {{/each}}
-                        {{/if}}
-                </table>
+            <!-- click handler needed for text submit, then display results that add the token on img click -->
+            <div class="input-field">
+                <input placeholder="Token search" id="search-for" type="text" class="validate">
+                <a class="btn" id="tokens-search">Search</a>
             </div>
+
         </div>
-        {{!-- <div class="input-field">
-            <input placeholder="Token search" id="search-for" type="text" class="validate">
-            <a class="btn" id="token-search">Search</a>
-        </div> --}}
-        <h4 class="center-align">...and select from results below!</h4>
-        <div id="searched-tokens"></div>
     </div>
-    <div class="modal-footer">
-        <a href="#!" id="add-token" class="modal-close waves-effect waves-green btn-flat">Add Token</a>
+    <h4 class="center-align">...and select from results below!</h4>
+    <div id="searched-tokens">
+        <form id="selected-token" action="#">
+            {{#each dbTokens}}
+            <p>
+                <label>
+                    <input name="group1" class="with-gap" value="{{id}}" type="radio" />
+                    <span>{{name}} - {{color}} - {{pt}} - {{text}}</span>
+                </label>
+            </p>
+            {{/each}}
+        </form>
+        <div class="modal-footer">
+            <button id="token-spawner" data-name="" class="modal-close waves-effect waves-green btn">Add
+                Selected</button>
+        </div>
     </div>
+</div>>
 </div>
 
 {{!-- Creates a socket listener for current game lobby --}}
