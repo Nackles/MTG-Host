@@ -45,8 +45,8 @@
         <div class="dropdown">
             <!-- click handler needed for text submit, then display results that add the token on img click -->
             <div class="input-field">
-                <input placeholder="Token search" id="{{player_id}}-search-for" type="text" class="validate">
-                <a class="btn" data-player="{{player_id}}" id="tokens-search">Search</a>
+                <input placeholder="Token search" id="search-for" type="text" class="validate">
+                <a class="btn" id="tokens-search">Search</a>
             </div>
 
         </div>
@@ -92,9 +92,7 @@
     })
 
     $("#tokens-search").on("click", () => {
-        let player = $(this).attr("data-player")
-        console.log("LOOK AT MY PLAYER", player)
-        let tokenName = $(`#${player}-search-for`).val();
+        let tokenName = $("#search-for").val();
         $.get(`/api/tokens/${tokenName}`, function (tokens) {
             let unique = []
             tokens.forEach(token => {
