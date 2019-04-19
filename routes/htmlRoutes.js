@@ -58,17 +58,6 @@ module.exports = function(app) {
       }
     }
 
-    // for (let logs in tokens) {
-    //   let token = tokens[logs].dataValues;
-    //   for (let player in players) {
-    //     if (players[player].player_id === token.player_id) {
-    //       console.log(token);
-    //       players[player].tokens.push(token.dataValues);
-    //       console.log(players[player].tokens);
-    //     }
-    //   }
-    // }
-
     console.log("LOOK AT ME INSTEAD", {
       players: players,
       game: req.params.gameId
