@@ -47,12 +47,13 @@ module.exports = function(app) {
     });
 
     // Add appropriate tokens to each player
-    for (let logs in tokens) {
-      token = tokens[logs].dataValues;
-      for (let player in players) {
-        if (players[player].player_id === token.player_id) {
-          console.log(token);
-          players[player].tokens.push(token.dataValues);
+    for (let i = 0; i < tokens.length; i++) {
+      let token = tokens[i];
+      for (let j = 0; j < players.length; j++) {
+        if (players[j].player_id === token.player_id) {
+          players[j].tokens.push(token.dataValues.token.dataValues);
+          console.log("TOKEN DATA", token.dataValues.token.dataValues);
+          console.log(players[j].tokens);
         }
       }
     }

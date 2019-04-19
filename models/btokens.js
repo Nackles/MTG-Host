@@ -13,6 +13,15 @@ module.exports = function(sequelize, DataTypes) {
     text: DataTypes.STRING
   });
 
+  tokens.associate = function(models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    tokens.hasMany(models.token_logs, {
+      forignKey: "token_id",
+      onDelete: "no action",
+      onUpdate: "no action"
+    });
+  };
   return tokens;
 };
 
