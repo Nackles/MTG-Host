@@ -52,17 +52,9 @@
     </div>
     <h4 class="center-align">...and select from results below!</h4>
     <div id="searched-tokens">
+        <div id="token-chooser">
 
-        <form id="selected-token" action="#">
-            {{#each tokensArray}}
-            <p>
-                <label>
-                    <input name="group1" class="with-gap" value="{{id}}" type="radio" />
-                    <span>{{name}} - {{color}} - {{pt}} - {{text}}</span>
-                </label>
-            </p>
-            {{/each}}
-        </form>
+        </div>
         <div class="modal-footer">
             <button id="token-spawner" data-name="" class="modal-close waves-effect waves-green btn">Add
                 Selected</button>
@@ -109,7 +101,7 @@
                     unique.push(token)
                 }
             })
-            let select = $("<select>").attr("id", "selected-token")
+            let select = $("<select>").attr("id", "selected-token").addClass("browser-default")
             console.log(unique)
             unique.forEach(token => {
                 // let p = $("<p>")
@@ -120,7 +112,7 @@
                 // p.append(label)
                 select.append(option)
             })
-            $("#searched-tokens").append(select)
+            $("#token-chooser").append(select)
         });
     })
 
