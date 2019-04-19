@@ -108,9 +108,8 @@
                     unique.push(token)
                 }
             })
-            let tokens = unique;
             let form = $("<form>").attr("id", "selected-token")
-            tokens.forEach(token => {
+            unique.forEach(token => {
                 let p = $("<p>")
                 let label = $("<label>")
                 let input = $("<input>").attr("name", "group1").addClass("with-gap").attr("value", token.id).attr("type", "radio")
