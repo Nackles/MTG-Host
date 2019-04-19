@@ -47,8 +47,12 @@ module.exports = function(app) {
     });
 
     // Add appropriate tokens to each player
+    // let keys =
+    // for(let i = 0; i<tokens.length; i++){
+    //   let token =
+    // }
     for (let logs in tokens) {
-      token = tokens[logs].dataValues;
+      let token = tokens[logs].dataValues;
       for (let player in players) {
         if (players[player].player_id === token.player_id) {
           console.log(token);
