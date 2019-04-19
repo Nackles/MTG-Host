@@ -1,14 +1,16 @@
 <ul class="collapsible">
     {{#each players}}
     <li>
-        <div class="collapsible-header"><i class="material-icons">place</i><span id="{{player_id}}-player">{{name}}</span> |
-            <span id="{{player_id}}-life"></span>{{life}}</span></div>
+        <div class="collapsible-header"><i class="material-icons">place</i><span
+                id="{{player_id}}-player">{{name}}</span> |
+            <span id="{{player_id}}-life">{{life}}</span></div>
 
         <div class="collapsible-body"><span>ENTER INTO THE TOKEN TRAY!</span>
             <div class="life-collection">
-                <span id="{{player_id}}-life-change" class="right"><input type="submit" class="link-color" href="#"
-                        value="Change Life"></span>
-                <form action="#">
+                <button data-player="{{player_id}}" class="right btn link-color life-change">Change
+                    Life</button>
+                <div class="row"></div>
+                <form>
                     <p class="range-field">
                         <input type="range" id="{{player_id}}-life-range" min="-20" max="20" />
                     </p>
@@ -50,7 +52,7 @@
     </div>
     <h4 class="center-align">...and select from results below!</h4>
     <div id="searched-tokens">
-        
+
         <form id="selected-token" action="#">
             {{#each tokensArray}}
             <p>
@@ -66,7 +68,7 @@
                 Selected</button>
         </div>
     </div>
-</div>>
+</div>
 </div>
 
 {{!-- Creates a socket listener for current game lobby --}}
@@ -82,15 +84,25 @@
         }
     });
 
-    // TODO: This is what I assumed I was needing to build - I mean, it does fire off instantly and come back with nothing...
-    // Recieve token data for token-modal
-    $.get("/api/tokens/:name", function(req, res){
-    db.tokens.findAll({
-        where: {
-            name: req.params.id}
-    })    
-    }).then(function(tokensArray){
-        console.log("HEY IT WORKED")
+    $(".life-change").on("click", function () {
+        let player_id = $(this).attr("data-player");
+        let game_id = $("#game-id").attr("data-id");
+        let lifeOriginal = $(`#${player_id}-life`).text();
+        let lifeChange = $(`#${player_id}-life-range`).val();
+        let life = parseInt(lifeOriginal) + parseInt(lifeChange);
+        let lifeKey = `life${player_id}`;
+        $.ajax({
+            url: "/api/games",
+            type: "PUT",
+            data: { [lifeKey]: life, game_id: game_id }
+        });
     })
-</script>
 
+    $("#tokens-search").on("click", () => {
+        let tokenName = $("#search-for").val();
+        $.get(`/api/tokens/${tokenName}`, function (data) {
+            console.log("DATA FROM TOKEN SEARCH", data);
+        });
+    })
+
+</script>
