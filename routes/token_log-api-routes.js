@@ -44,7 +44,7 @@ module.exports = function(app) {
   app.post("/api/token_logs", function(req, res) {
     app.io.sockets.emit("update", req.body.game_id);
     db.token_logs.create(req.body).then(function() {
-      res.redirect(`arena/${req.body.game_id}`);
+      res.redirect(`arena/${req.body.game_id}`); //
     });
   });
 
