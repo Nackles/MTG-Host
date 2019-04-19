@@ -51,6 +51,10 @@ module.exports = function(app) {
       }
     }
 
+    console.log("LOOK AT ME INSTEAD", {
+      players: players,
+      game: req.params.gameId
+    });
     res.render("arena", {
       players: players,
       game: req.params.gameId

@@ -45,6 +45,7 @@ module.exports = function(app) {
           let player = await getPlayer(game.player4_id);
           players.push(player[0].dataValues);
         }
+        console.log("LOOK AT ME", { game: game, players: players });
         res.render("arena", { game: game, players: players }); // TODO: Player needs icon, tokens, stats, poison. Breaks functionality at moment
       });
   });
@@ -59,14 +60,15 @@ module.exports = function(app) {
 
   // PUT route for updating games.  We are going to update, depending on the flow of the games, most of the fields in the table, using this
   app.put("/api/games", function(req, res) {
+    app.io.sockets.emit("update", req.body.game_id);
     db.games
       .update(req.body, {
         where: {
-          id: req.body.id
+          id: req.body.game_id
         }
       })
       .then(function() {
-        res.redirect(`/api/games/${req.body.id}`);
+        res.redirect(`/api/games/${req.body.game_id}`);
       });
   });
 
