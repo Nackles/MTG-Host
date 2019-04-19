@@ -30,6 +30,7 @@
       //Initialize Materialize elements
       $('.collapsible').collapsible();
       $('.modal').modal();
+      $('select').material_select()
 
       // Before allowImgReset, clicking ANYWHERE in .collapsible would reset the carousel to the first image in an annoying enough way that users might not use the app - this fixed that by only allowing one .carousel initiialization.
       let allowImgReset = true;
@@ -42,7 +43,7 @@
 
       // When you click a player's Add Token button, the modal opens and the Add Token modal's submit button recieves a data-name attribute = that player's ID.
       $(".modal-trigger").on("click", function () {
-        console.log("What's THIS:",this)
+        console.log("What's THIS:", this)
         $("#token-spawner").attr("data-name", this.id)
         console.log("token spawner player id = " + $("#token-spawner").attr('data-name'))
       })
@@ -51,10 +52,10 @@
       $("#tokens-search").on("click", function () {
         // Token search term
         let searchFor = $("#search-for").val().trim();
-        console.log("SEARCH FOR:",searchFor)
+        console.log("SEARCH FOR:", searchFor)
 
-        $.get("/api/tokens/"+searchFor, function (data) {
-          console.log("LOGED DATA:",data)
+        $.get("/api/tokens/" + searchFor, function (data) {
+          console.log("LOGED DATA:", data)
         })
       })
 
@@ -63,13 +64,13 @@
       $(document).on("click", "#token-spawner", function () {
 
         // Get the id of the player to add the token to
-        let addToPlayer = $(this.data-name)
+        let addToPlayer = $(this.data - name)
         // Get the id of the token by the checked radio token's value, which is set on-handlebars of the list.
         let addToken = $('input[name=group1]:checked', '#selected-token').val()
 
         // Make a post request to the server informing it that player addToPlayer now owns addToken.
         //app.post("/api/token_logs", function (req, res) {
-        
+
 
         //})
 
