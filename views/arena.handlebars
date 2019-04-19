@@ -100,8 +100,19 @@
 
     $("#tokens-search").on("click", () => {
         let tokenName = $("#search-for").val();
-        $.get(`/api/tokens/${tokenName}`, function (data) {
-            console.log("DATA FROM TOKEN SEARCH", data);
+        $.get(`/api/tokens/${tokenName}`, function (tokens) {
+            console.log("DATA FROM TOKEN SEARCH", tokens);
+            let form = $("<form>").attr("id", "selected-token")
+            tokens.forEach(token => {
+                let p = $("<p>")
+                let label = $("<label>")
+                let input = $("<input>").attr("name", "group1").addClass("with-gap").attr("value", token.id).attr("type", "radio")
+                let span = $("<span>").text(`${token.name} - ${token.color} - ${token.pt} - ${token.text}`)
+                label.append(input, span)
+                p.append(label)
+                form.append(p)
+            })
+            $("#selected-token").append(form)
         });
     })
 
