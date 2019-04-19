@@ -23,7 +23,7 @@
 
             <div id="{{player_id}}-tokens-active" class="container">
                 <div class="carousel">
-                    {{#each data}}
+                    {{#each dbTokens}}
                     <div class="carousel-item {{name}}"><span id="{{name}}-{{@index}}">{{name}}</span><img
                             src="{{img}}">
                     </div>
@@ -50,8 +50,9 @@
     </div>
     <h4 class="center-align">...and select from results below!</h4>
     <div id="searched-tokens">
+        
         <form id="selected-token" action="#">
-            {{#each dbTokens}}
+            {{#each tokensArray}}
             <p>
                 <label>
                     <input name="group1" class="with-gap" value="{{id}}" type="radio" />
@@ -71,6 +72,8 @@
 {{!-- Creates a socket listener for current game lobby --}}
 <span id="game-id" data-id={{game}}></span>
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
     let socket = io();
     socket.on("update", function (game) {
@@ -78,4 +81,16 @@
             window.location = `/arena/${game}`
         }
     });
+
+    // TODO: This is what I assumed I was needing to build - I mean, it does fire off instantly and come back with nothing...
+    // Recieve token data for token-modal
+    $.get("/api/tokens/:name", function(req, res){
+    db.tokens.findAll({
+        where: {
+            name: req.params.id}
+    })    
+    }).then(function(tokensArray){
+        console.log("HEY IT WORKED")
+    })
 </script>
+

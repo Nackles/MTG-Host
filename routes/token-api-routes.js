@@ -36,16 +36,18 @@ module.exports = function(app) {
       });
   });
 
+  // TODO: Just in case I forget to change it back, I'm testing displaying the tokens list with this by changing findOne to findAll and where: id to where: name. I need a route like this. TODO: NOTE: This is *DEFINITELY* returning what I need: an arry of token objects. I just need to figure out how to feed that to handlebars.
   app.get("/api/tokens/:id", function(req, res) {
     // This will get real time update info for all clients
     db.tokens
-      .findOne({
+      .findAll({
         where: {
-          id: req.params.id
+          name: req.params.id
         }
       })
-      .then(function(dbTokens) {
-        res.json(dbTokens);
+      .then(function(tokensArray) {
+        // I just need handlebars to eat this data and spit it into my template.
+        res.json(tokensArray);
       });
   });
 
