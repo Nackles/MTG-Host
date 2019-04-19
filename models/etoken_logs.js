@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
     token_logs.belongsTo(models.games, {
-      forignKey: "game_id",
+      forignKey: "id",
       onDelete: "no action",
       onUpdate: "no action"
     });
@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
     token_logs.belongsTo(models.players, {
-      forignKey: "player_id",
+      forignKey: "id",
       onDelete: "no action",
       onUpdate: "no action"
     });
@@ -45,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
     token_logs.belongsTo(models.tokens, {
-      forignKey: "token_id",
+      forignKey: "id",
       onDelete: "no action",
       onUpdate: "no action"
     });
