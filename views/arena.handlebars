@@ -25,9 +25,9 @@
 
             <div id="{{player_id}}-tokens-active" class="container">
                 <div class="carousel">
-                    {{#each dbTokens}}
-                    <div class="carousel-item {{name}}"><span id="{{name}}-{{@index}}">{{name}}</span><img
-                            src="{{img}}">
+                    {{#each tokens}}
+                    <div class="carousel-item {{name}}"><span id="{{name}}-{{@index}}">{{name}} - {{color}} - {{pt}} -
+                            {{text}}</span>
                     </div>
                     {{/each}}
                 </div>
