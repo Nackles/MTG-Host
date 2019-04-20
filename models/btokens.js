@@ -24,18 +24,3 @@ module.exports = function(sequelize, DataTypes) {
   };
   return tokens;
 };
-
-// create table if not exists token
-// (
-//   id INT NOT NULL AUTO_INCREMENT,
-//   name VARCHAR (255) not null,
-//   color VARCHAR (255),
-//   type VARCHAR (255),
-//   pt VARCHAR (255),
-//   abilities VARCHAR (255),
-//   icon varchar(500),
-//   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-//   updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-//   last_updated_by int default 1,
-//   PRIMARY KEY (id)
-// );

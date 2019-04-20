@@ -53,15 +53,3 @@ module.exports = function(sequelize, DataTypes) {
 
   return token_logs;
 };
-
-// create table if not exists token_log
-//   (
-//     id INT NOT NULL AUTO_INCREMENT,
-//     game_id INT REFERENCES game(id),
-//     player_id INT REFERENCES player(id),
-//     token_id INT REFERENCES token(id),
-//     tapped BOOLEAN default false,
-//     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-//     updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-//     PRIMARY KEY(id)
-//   );

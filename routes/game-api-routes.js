@@ -11,50 +11,11 @@
 let db = require("../models");
 
 module.exports = function(app) {
-  app.get("/api/games", function(req, res) {
-    // This would be an admin dashboard of all games in progress.  In real life this would be kept secure/secret
-    db.games.findAll({}).then(function(dbGames) {
-      res.json(dbGames);
-    });
-  });
-
-  app.get("/api/games/:id", function(req, res) {
-    // This will get real time update info for all clients
-    db.games
-      .findOne({
-        where: {
-          id: req.params.id
-        }
-      })
-      .then(async function(dbGame) {
-        let game = dbGame.dataValues;
-        let players = [];
-        if (game.player1_id) {
-          let player = await getPlayer(game.player1_id);
-          players.push(player[0].dataValues);
-        }
-        if (game.player2_id) {
-          let player = await getPlayer(game.player2_id);
-          players.push(player[0].dataValues);
-        }
-        if (game.player3_id) {
-          let player = await getPlayer(game.player3_id);
-          players.push(player[0].dataValues);
-        }
-        if (game.player4_id) {
-          let player = await getPlayer(game.player4_id);
-          players.push(player[0].dataValues);
-        }
-        console.log("LOOK AT ME", { game: game, players: players });
-        res.render("arena", { game: game, players: players }); // TODO: Player needs icon, tokens, stats, poison. Breaks functionality at moment
-      });
-  });
-
   // creating games and establishing initial parameters.  Starting data is player1_id (and, if we elect to go this route, how many players)
-  app.post("/api/games", function(req, res) {
-    db.games.create(req.body).then(function(dbGame) {
-      res.redirect(`/api/games/${dbGame.dataValues.id}`);
-      // res.json(dbGame);
+  app.post("/api/newGame", isAuthenticated, function(req, res) {
+    db.games.create({ player1_id: req.user.id, life1: 20 }).then(data => {
+      link = `/arena/${data.dataValues.id}`;
+      res.redirect(link);
     });
   });
 
@@ -71,21 +32,4 @@ module.exports = function(app) {
         res.redirect(`/api/games/${req.body.game_id}`);
       });
   });
-
-  // Not likely we would delete games ids, but here it in just in case
-  app.delete("/api/games/:id", function(req, res) {
-    db.games
-      .destroy({
-        where: {
-          id: req.params.id
-        }
-      })
-      .then(function(dbGames) {
-        res.json(dbGames);
-      });
-  });
 };
-
-function getPlayer(uid) {
-  return db.players.findAll({ where: { id: uid } });
-}

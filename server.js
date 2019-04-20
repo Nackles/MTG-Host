@@ -29,14 +29,12 @@ app.use(passport.session());
 // socket setup
 let http = require("http").createServer(app);
 let io = require("socket.io")(http);
-// require("./socket.js")(io);
 app.io = io;
 
 // Requiring our routes
 require("./routes/auth-api-routes.js")(app);
-require("./routes/player-api-routes.js")(app);
 require("./routes/game-api-routes.js")(app);
-require("./routes/token-api-routes.js")(app); // This is just for test to insert some Tokens.  Haven't learned to migrate or admin popluate TOKENS
+require("./routes/token-api-routes.js")(app);
 require("./routes/token_log-api-routes.js")(app);
 require("./routes/htmlRoutes.js")(app);
 

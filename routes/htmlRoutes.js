@@ -101,13 +101,6 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/arena/newGame", isAuthenticated, function(req, res) {
-    db.games.create({ player1_id: req.user.id, life1: 20 }).then(data => {
-      link = `/arena/${data.dataValues.id}`;
-      res.redirect(link);
-    });
-  });
-
   app.get("*", function(req, res) {
     res.render("404");
   });
