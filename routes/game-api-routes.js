@@ -9,6 +9,7 @@
 // Queries needed: 5 Insert record for new games, update record to add players, update record to adjust life, update record to to trigger games start , update record to set end games info (these things *could* be stored only in results table, and we may end up doing that).  A query associated with the result table will add that needful data
 
 let db = require("../models");
+let isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
   // creating games and establishing initial parameters.  Starting data is player1_id (and, if we elect to go this route, how many players)
