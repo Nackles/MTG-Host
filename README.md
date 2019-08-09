@@ -15,7 +15,7 @@ To use MTG-Host,
 7. Thank you for playing!
 
 # Project Goals
-To create a companion app for pape - aka offline - Magic: The Gathering that adds some digital functionality to an otherwise analog game. Life tracking, token tracking (to reduce real-life board clutter), and statistic tracking are our core desired functions for MTG-Host.
+To create a companion app for paper - aka offline - Magic: The Gathering that adds some digital functionality to an otherwise analog game. Life tracking, token tracking (to reduce real-life board clutter), and statistic tracking are our core desired functions for MTG-Host.
 
 # Status
 As of writing, MTG-Host can successfully host games of up to four players, add tokens to the first player's tray (after a minor bugfix the token-adding function will work for more players), and life can be tracked. All of the tracked information updates on every player's device.
